@@ -1,1 +1,1 @@
-# TrippyTravel
+# Hotel
