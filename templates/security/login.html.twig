@@ -42,12 +42,19 @@
                                 </div>
                             #}
                             <br>
-                            <button class="btn btn-lg btn-primary" type="submit">
-                                Sign in
-                            </button>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button class="btn btn-lg btn-primary" type="submit">
+                                        Sign in
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{{ path("app_register") }}" class="white">Or register ?</a>
+                                </div>
+                            </div>
+                            
                 </form>
 
-                <a href="{{ path("app_register") }}">Or register ?</a>
                 
             </div>
         </div>
