@@ -17,4 +17,13 @@ class MaisonhotesController extends AbstractController
             'controller_name' => 'MaisonhotesController',
         ]);
     }
+    /**
+     * @Route("/admin-dashboard/maisonhotes", name="admin-dashboard/maisonhotes")
+     */
+    public function admin_index(): Response
+    {
+        return $this->render('maisonhotes/admin_index.html.twig', [
+            'controller_name' => 'MaisonhotesController',
+        ]);
+    }
 }

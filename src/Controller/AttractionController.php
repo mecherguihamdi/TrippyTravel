@@ -17,4 +17,13 @@ class AttractionController extends AbstractController
             'controller_name' => 'AttractionController',
         ]);
     }
+    /**
+     * @Route("/admin-dashboard/attraction", name="admin-dashboard/attraction")
+     */
+    public function admin_index(): Response
+    {
+        return $this->render('attraction/admin_index.html.twig', [
+            'controller_name' => 'ExcursionController',
+        ]);
+    }
 }

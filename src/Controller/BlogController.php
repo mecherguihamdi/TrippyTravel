@@ -17,4 +17,14 @@ class BlogController extends AbstractController
             'controller_name' => 'BlogController',
         ]);
     }
+
+    /**
+     * @Route("/admin-dashboard/blog", name="admin-dashboard/blog")
+     */
+    public function admin_index(): Response
+    {
+        return $this->render('blog/admin_index.html.twig', [
+            'controller_name' => 'BlogController',
+        ]);
+    }
 }

@@ -17,4 +17,13 @@ class HotelController extends AbstractController
             'controller_name' => 'HotelController',
         ]);
     }
+    /**
+     * @Route("/admin-dashboard/hotel", name="admin-dashboard/hotel")
+     */
+    public function admin_index(): Response
+    {
+        return $this->render('hotel/admin_index.html.twig', [
+            'controller_name' => 'HotelController',
+        ]);
+    }
 }

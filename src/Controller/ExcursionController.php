@@ -19,7 +19,7 @@ class ExcursionController extends AbstractController
     }
 
     /**
-     * @Route("/admin-dashboard/excursion", name="excursion")
+     * @Route("/admin-dashboard/excursion", name="admin-dashboard/excursion")
      */
     public function admin_index(): Response
     {
