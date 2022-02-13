@@ -30,13 +30,18 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
+    /**
+    * @var Security
+    */
+    private $security;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder, Security $security)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->security = $security;
     }
 
     public function supports(Request $request)
@@ -93,6 +98,18 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
+        }
+        
+        $user = $this->security->getUser();
+        $roles = $user->getRoles();
+        $rolesTab = array_map(function($role){
+            return $role;
+        }, $roles);
+        if (in_array('ROLE_ADMIN', $rolesTab)) {
+            return new RedirectResponse($this->urlGenerator->generate('admin-dashboard'));
+        }
+        else{
+            return new RedirectResponse($this->urlGenerator->generate('home'));
         }
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
