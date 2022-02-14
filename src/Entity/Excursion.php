@@ -43,7 +43,7 @@ class Excursion
     private $prix;
 
     /**
-     * @ORM\ManyToOne(targetEntity=excursioncategorie::class, inversedBy="excursions")
+     * @ORM\ManyToOne(targetEntity=Excursioncategorie::class, inversedBy="excursions")
      * @ORM\JoinColumn(nullable=false)
      */
     private $excursioncategorie;

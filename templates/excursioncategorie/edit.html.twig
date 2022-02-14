@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Excursioncategorie{% endblock %}
+
+{% block body %}
+    <h1>Edit Excursioncategorie</h1>
+
+    {{ include('excursioncategorie/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('excursioncategorie_index') }}">back to list</a>
+
+    {{ include('excursioncategorie/_delete_form.html.twig') }}
+{% endblock %}
