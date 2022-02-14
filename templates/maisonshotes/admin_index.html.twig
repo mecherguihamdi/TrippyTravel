@@ -1,0 +1,47 @@
+{% extends 'baseBO.html.twig' %}
+
+{% block title %}Hello MaisonshotesController!{% endblock %}
+
+{% block body %}
+    <h1>Maisonshotes index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+
+            <th>Id</th>
+            <th>Libelle</th>
+            <th>Capacite</th>
+            <th>Localisation</th>
+            <th>Proprietaire</th>
+            <th>Prix</th>
+            <th>NbrChambres</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for maisonshote in maisonshotes %}
+            <tr>
+
+                <td>{{ maisonshote.Id }}</td>
+                <td>{{ maisonshote.libelle }}</td>
+                <td>{{ maisonshote.capacite }}</td>
+                <td>{{ maisonshote.localisation }}</td>
+                <td>{{ maisonshote.proprietaire }}</td>
+                <td>{{ maisonshote.prix }}</td>
+                <td>{{ maisonshote.nbrChambres }}</td>
+                <td>
+                    <a href="{{ path('maisonshotes_show', {'ref': maisonshote.id}) }}">show</a>
+                    <a href="{{ path('maisonshotes_edit', {'ref': maisonshote.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('maisonshotes_new') }}">Create new</a>
+{% endblock %}

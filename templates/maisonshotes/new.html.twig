@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Maisonshotes{% endblock %}
+
+{% block body %}
+    <h1>Create new Maisonshotes</h1>
+
+    {{ include('maisonshotes/_form.html.twig') }}
+
+    <a href="{{ path('maisonshotes_index') }}">back to list</a>
+{% endblock %}
