@@ -11,23 +11,22 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/excursion")
- */
+
 class ExcursionController extends AbstractController
 {
     /**
-     * @Route("/", name="excursion_index", methods={"GET"})
+     * @Route("admin-dashboard/excursion/", name="excursion_index", methods={"GET"})
      */
     public function index(ExcursionRepository $excursionRepository): Response
     {
-        return $this->render('excursion/index.html.twig', [
+        return $this->render('excursion/admin_index.html.twig', [
             'excursions' => $excursionRepository->findAll(),
         ]);
     }
 
+
     /**
-     * @Route("/new", name="excursion_new", methods={"GET", "POST"})
+     * @Route("admin-dashboard/excursion/new", name="excursion_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -49,7 +48,7 @@ class ExcursionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="excursion_show", methods={"GET"})
+     * @Route("admin-dashboard/excursion/{id}", name="excursion_show", methods={"GET"})
      */
     public function show(Excursion $excursion): Response
     {
@@ -59,7 +58,7 @@ class ExcursionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="excursion_edit", methods={"GET", "POST"})
+     * @Route("admin-dashboard/excursion/{id}/edit", name="excursion_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Excursion $excursion, EntityManagerInterface $entityManager): Response
     {
@@ -79,7 +78,7 @@ class ExcursionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="excursion_delete", methods={"POST"})
+     * @Route("admin-dashboard/excursion/{id}", name="excursion_delete", methods={"POST"})
      */
     public function delete(Request $request, Excursion $excursion, EntityManagerInterface $entityManager): Response
     {

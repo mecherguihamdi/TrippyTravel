@@ -1,42 +1,54 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBO.html.twig' %}
 
 {% block title %}Excursion{% endblock %}
 
 {% block body %}
-    <h1>Excursion</h1>
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1>Excursion</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ excursion.id }}</td>
-            </tr>
-            <tr>
-                <th>Libelle</th>
-                <td>{{ excursion.libelle }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ excursion.description }}</td>
-            </tr>
-            <tr>
-                <th>Programme</th>
-                <td>{{ excursion.programme }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ excursion.ville }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ excursion.prix }}</td>
-            </tr>
-        </tbody>
-    </table>
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th>Id</th>
+                                    <td>{{ excursion.id }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Libelle</th>
+                                    <td>{{ excursion.libelle }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Description</th>
+                                    <td>{{ excursion.description }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Programme</th>
+                                    <td>{{ excursion.programme }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Ville</th>
+                                    <td>{{ excursion.ville }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Prix</th>
+                                    <td>{{ excursion.prix }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
 
-    <a href="{{ path('excursion_index') }}">back to list</a>
+                            <a class="btn btn-success" href="{{ path('excursion_index') }}">retour à la liste</a>
 
-    <a href="{{ path('excursion_edit', {'id': excursion.id}) }}">edit</a>
+                            <a class="btn btn btn-warning" href="{{ path('excursion_edit', {'id': excursion.id}) }}">Modifier</a>
 
-    {{ include('excursion/_delete_form.html.twig') }}
+                            {{ include('excursion/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
