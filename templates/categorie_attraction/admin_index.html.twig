@@ -1,0 +1,48 @@
+{% extends 'baseBO.html.twig' %}
+
+{% block title %}CategorieAttraction index{% endblock %}
+
+{% block body %}
+      <div class="main-panel">
+        <div class="content-wrapper">
+            <h1 class="container">Categories Attractions</h1> <br>
+          <div class="row">
+            <div class="grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"></h4>
+                  <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>ContrainteAge</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie_attraction in categorie_attractions %}
+            <tr>
+                <td>{{ categorie_attraction.id }}</td>
+                <td>{{ categorie_attraction.libelle }}</td>
+                <td>{{ categorie_attraction.contrainteAge ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('categorie_attraction_show', {'id': categorie_attraction.id}) }}" class="btn btn-primary">show</a>
+                    <a href="{{ path('categorie_attraction_edit', {'id': categorie_attraction.id}) }}" class="btn btn-warning">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    </div>
+    <a href="{{ path('categorie_attraction_new') }}" class="btn btn-secondary">Create new</a>
+    </div>
+{% endblock %}

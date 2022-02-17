@@ -3,8 +3,15 @@
 {% block title %}Attraction dashboard{% endblock %}
 
 {% block body %}
-    <h1>Attraction dashboard index</h1>
-
+      <div class="main-panel">
+        <div class="content-wrapper">
+            <h1>Attractions</h1> <br>
+          <div class="row">
+            <div class="grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"></h4>
+                  <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
@@ -13,7 +20,9 @@
                 <th>Localisation</th>
                 <th>Horraire</th>
                 <th>Prix</th>
+                <th>Categorie</th>
                 <th>actions</th>
+
             </tr>
         </thead>
         <tbody>
@@ -24,9 +33,10 @@
                 <td>{{ a.localisation }}</td>
                 <td>{{ a.horraire }}</td>
                 <td>{{ a.prix }}</td>
+                <td>{{ a.getIdCategorie()}}</td>
                 <td>
-                    <a href="{{ path('attraction_show', {'id': a.id}) }}">show</a>
-                    <a href="{{ path('attraction_edit', {'id': a.id}) }}">edit</a>
+                    <a href="{{ path('attraction_show', {'id': a.id}) }}" class="btn btn-primary">show</a>
+                    <a href="{{ path('attraction_edit', {'id': a.id}) }}" class="btn btn-warning">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -36,6 +46,10 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('attraction_new') }}">Create new</a>
+    </div>
+        </div>
+    </div>
+    </div>
+        <a href="{{ path('attraction_new') }}" class="btn btn-secondary">Create new</a>
+    </div>
 {% endblock %}

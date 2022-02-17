@@ -12,12 +12,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
     /**
-     * @Route("/attraction")
+     * @Route("/")
      */
 class AttractionController extends AbstractController
 {
     /**
-     * @Route("/", name="attraction_index", methods={"GET"})
+     * @Route("/attraction_index", name="attraction_index", methods={"GET"})
      */
     public function index(AttractionRepository $attractionRepository): Response
     {
@@ -37,7 +37,7 @@ class AttractionController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="attraction_new", methods={"GET", "POST"})
+     * @Route("/admin-dashboard/attraction/new", name="attraction_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -59,17 +59,18 @@ class AttractionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="attraction_show", methods={"GET"})
+     * @Route("admin-dashboard/attraction/{id}", name="attraction_show", methods={"GET"})
      */
     public function show(Attraction $attraction): Response
     {
         return $this->render('attraction/show.html.twig', [
             'attraction' => $attraction,
         ]);
+
     }
 
     /**
-     * @Route("/{id}/edit", name="attraction_edit", methods={"GET", "POST"})
+     * @Route("admin-dashboard/attraction/{id}/edit", name="attraction_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Attraction $attraction, EntityManagerInterface $entityManager): Response
     {
@@ -79,7 +80,7 @@ class AttractionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('attraction_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin-dashboard/attraction', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('attraction/edit.html.twig', [

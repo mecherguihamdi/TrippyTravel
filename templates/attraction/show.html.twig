@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBO.html.twig' %}
 
 {% block title %}Attraction{% endblock %}
 
@@ -27,10 +27,11 @@
                 <th>Prix</th>
                 <td>{{ attraction.prix }}</td>
             </tr>
+
         </tbody>
     </table>
 
-    <a href="{{ path('attraction_index') }}">back to list</a>
+    <a href="{{ path('admin-dashboard/attraction') }}">back to list</a>
 
     <a href="{{ path('attraction_edit', {'id': attraction.id}) }}">edit</a>
 
