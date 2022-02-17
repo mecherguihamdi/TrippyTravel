@@ -49,7 +49,7 @@ class CategorieAttractionController extends AbstractController
             $entityManager->persist($categorieAttraction);
             $entityManager->flush();
 
-            return $this->redirectToRoute('categorie_attraction/admin_index.html.twig', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin-dashboard/categorie_attraction', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('categorie_attraction/new.html.twig', [
@@ -79,7 +79,7 @@ class CategorieAttractionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('categorie_attraction_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin-dashboard/categorie_attraction', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('categorie_attraction/edit.html.twig', [
@@ -89,7 +89,7 @@ class CategorieAttractionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="categorie_attraction_delete", methods={"POST"})
+     * @Route("/admin-dashboard/{id}", name="categorie_attraction_delete", methods={"POST"}, requirements={"id":"\d+"})
      */
     public function delete(Request $request, CategorieAttraction $categorieAttraction, EntityManagerInterface $entityManager): Response
     {
@@ -98,6 +98,6 @@ class CategorieAttractionController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('categorie_attraction_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin-dashboard/categorie_attraction', [], Response::HTTP_SEE_OTHER);
     }
 }

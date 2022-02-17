@@ -49,7 +49,7 @@ class AttractionController extends AbstractController
             $entityManager->persist($attraction);
             $entityManager->flush();
 
-            return $this->redirectToRoute('attraction_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin-dashboard/attraction', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('attraction/new.html.twig', [
@@ -99,6 +99,6 @@ class AttractionController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('attraction_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin-dashboard/attraction', [], Response::HTTP_SEE_OTHER);
     }
 }
