@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Excursioncategorie{% endblock %}
+
+{% block body %}
+    <h1>Create new Excursioncategorie</h1>
+
+    {{ include('excursioncategorie/_form.html.twig') }}
+
+    <a href="{{ path('excursioncategorie_index') }}">back to list</a>
+{% endblock %}
