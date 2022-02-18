@@ -11,13 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/excursioncategorie")
- */
 class ExcursioncategorieController extends AbstractController
 {
     /**
-     * @Route("/", name="excursioncategorie_index", methods={"GET"})
+     * @Route("admin-dashboard//excursioncategorie/", name="excursioncategorie_index", methods={"GET"})
      */
     public function index(ExcursioncategorieRepository $excursioncategorieRepository): Response
     {
@@ -27,7 +24,7 @@ class ExcursioncategorieController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="excursioncategorie_new", methods={"GET", "POST"})
+     * @Route("admin-dashboard//excursioncategorie/new", name="excursioncategorie_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -49,7 +46,7 @@ class ExcursioncategorieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="excursioncategorie_show", methods={"GET"})
+     * @Route("admin-dashboard//excursioncategorie/{id}", name="excursioncategorie_show", methods={"GET"})
      */
     public function show(Excursioncategorie $excursioncategorie): Response
     {
@@ -59,7 +56,7 @@ class ExcursioncategorieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="excursioncategorie_edit", methods={"GET", "POST"})
+     * @Route("admin-dashboard//excursioncategorie/{id}/edit", name="excursioncategorie_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Excursioncategorie $excursioncategorie, EntityManagerInterface $entityManager): Response
     {
@@ -79,7 +76,7 @@ class ExcursioncategorieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="excursioncategorie_delete", methods={"POST"})
+     * @Route("admin-dashboard//excursioncategorie/{id}", name="excursioncategorie_delete", methods={"POST"})
      */
     public function delete(Request $request, Excursioncategorie $excursioncategorie, EntityManagerInterface $entityManager): Response
     {

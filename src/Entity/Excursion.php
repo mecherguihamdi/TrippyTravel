@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\ExcursionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ExcursionRepository::class)
@@ -19,26 +22,35 @@ class Excursion
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
      */
     private $description;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
      */
     private $programme;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $ville;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank
+     * @Assert\Type(
+     *     type="float",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $prix;
 
@@ -47,6 +59,19 @@ class Excursion
      * @ORM\JoinColumn(nullable=false)
      */
     private $excursioncategorie;
+
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Image()
+     * */
+    private $image;
+
+
+    public function __construct()
+    {
+    }
 
     public function getId(): ?int
     {
@@ -124,4 +149,20 @@ class Excursion
 
         return $this;
     }
+
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+
+
 }

@@ -1,26 +1,38 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBO.html.twig' %}
 
 {% block title %}Excursioncategorie{% endblock %}
 
 {% block body %}
-    <h1>Excursioncategorie</h1>
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1>Excursioncategorie</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ excursioncategorie.id }}</td>
-            </tr>
-            <tr>
-                <th>Libelle</th>
-                <td>{{ excursioncategorie.libelle }}</td>
-            </tr>
-        </tbody>
-    </table>
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th>Id</th>
+                                    <td>{{ excursioncategorie.id }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Libellé</th>
+                                    <td>{{ excursioncategorie.libelle }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
 
-    <a href="{{ path('excursioncategorie_index') }}">back to list</a>
+                            <a class="btn btn-success" href="{{ path('excursioncategorie_index') }}">retour à la liste</a>
 
-    <a href="{{ path('excursioncategorie_edit', {'id': excursioncategorie.id}) }}">edit</a>
+                            <a class="btn btn btn-warning" href="{{ path('excursioncategorie_edit', {'id': excursioncategorie.id}) }}">Modifier</a>
 
-    {{ include('excursioncategorie/_delete_form.html.twig') }}
+                            {{ include('excursioncategorie/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

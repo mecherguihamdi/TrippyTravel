@@ -7,6 +7,7 @@ use App\Form\ExcursionType;
 use App\Repository\ExcursionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +20,7 @@ class ExcursionController extends AbstractController
      */
     public function index(ExcursionRepository $excursionRepository): Response
     {
-        return $this->render('excursion/admin_index.html.twig', [
+        return $this->render('excursion/index.html.twig', [
             'excursions' => $excursionRepository->findAll(),
         ]);
     }
@@ -35,9 +36,24 @@ class ExcursionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /***/
+            $image = $form->get('image')->getData();
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = $originalFilename . '_' . uniqid() . '.' . $image->guessExtension();
+                try {
+                    $image->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    echo $e->getMessage();
+                }
+                $excursion->setImage($newFilename);
+            }
+            /***/
             $entityManager->persist($excursion);
             $entityManager->flush();
-
             return $this->redirectToRoute('excursion_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -64,10 +80,24 @@ class ExcursionController extends AbstractController
     {
         $form = $this->createForm(ExcursionType::class, $excursion);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            /***/
+            $image = $form->get('image')->getData();
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = $originalFilename . '_' . uniqid() . '.' . $image->guessExtension();
+                try {
+                    $image->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    echo $e->getMessage();
+                }
+                $excursion->setImage($newFilename);
+            }
+            /***/
             $entityManager->flush();
-
             return $this->redirectToRoute('excursion_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -88,5 +118,26 @@ class ExcursionController extends AbstractController
         }
 
         return $this->redirectToRoute('excursion_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    /**
+     * @Route("excursion/", name="excursion_index_front", methods={"GET"})
+     */
+    public function index_front(ExcursionRepository $excursionRepository): Response
+    {
+        return $this->render('excursion/front_index.html.twig', [
+            'excursions' => $excursionRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("excursion/{id}", name="excursion_show_front", methods={"GET"})
+     */
+    public function show_front(Excursion $excursion): Response
+    {
+        return $this->render('excursion/show_front.html.twig', [
+            'excursion' => $excursion,
+        ]);
     }
 }

@@ -5,7 +5,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Star Admin2 </title>
+    {% block title %}
+    {% endblock %}
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('back-office/vendors/feather/feather.css') }}">
     <link rel="stylesheet" href="{{ asset('back-office/vendors/mdi/css/materialdesignicons.min.css') }}">
@@ -375,11 +376,17 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ path('excursion_index') }}" class="nav-link" >
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                         <i class="menu-icon mdi mdi-floor-plan"></i>
                         <span class="menu-title">Excursions</span>
                         <i class="menu-arrow"></i>
                     </a>
+                    <div class="collapse" id="ui-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('excursion_index') }}">Liste Excursions</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('excursioncategorie_index') }}">Liste Catégories</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="{{ path('admin-dashboard/hotel') }}" class="nav-link" >
