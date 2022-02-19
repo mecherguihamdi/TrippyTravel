@@ -70,6 +70,7 @@ class ExcursionController extends AbstractController
     {
         return $this->render('excursion/show.html.twig', [
             'excursion' => $excursion,
+            'categorie' => $excursion->getExcursioncategorie()->getLibelle(),
         ]);
     }
 

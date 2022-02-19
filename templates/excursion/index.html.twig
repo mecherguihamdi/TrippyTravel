@@ -19,9 +19,7 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Libelle</th>
-                                        <th>Description</th>
-                                        <th>Programme</th>
-                                        <th>Ville</th>
+                                        <th>Catégorie</th>
                                         <th>Prix</th>
                                         <th>actions</th>
                                     </tr>
@@ -31,9 +29,8 @@
                                         <tr>
                                             <td>{{ excursion.id }}</td>
                                             <td>{{ excursion.libelle }}</td>
-                                            <td>{{ excursion.description }}</td>
-                                            <td>{{ excursion.programme }}</td>
-                                            <td>{{ excursion.ville }}</td>
+                                            <td>{{ excursion.excursioncategorie.libelle }}</td>
+
                                             <td>{{ excursion.prix }}</td>
                                             <td>
                                                 <a class="btn btn-info" href="{{ path('excursion_show', {'id': excursion.id}) }}">Afficher</a>

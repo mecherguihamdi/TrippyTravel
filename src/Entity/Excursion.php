@@ -46,10 +46,10 @@ class Excursion
 
     /**
      * @ORM\Column(type="float")
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="ggggkujgjhg")
      * @Assert\Type(
      *     type="float",
-     *     message="The value {{ value }} is not a valid {{ type }}."
+     *     message="ggg {{ value }} is not a valid {{ type }}."
      * )
      */
     private $prix;
