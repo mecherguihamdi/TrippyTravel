@@ -38,14 +38,19 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a href="{{ path("home") }}" class="nav-link">Acceuil</a></li>
                 <li class="nav-item"><a href="{{ path("maisonhotes") }}" class="nav-link">Maison d'hotes</a></li>
                 <li class="nav-item"><a href="{{ path("excursion") }}" class="nav-link">Excursion</a></li>
                 <li class="nav-item"><a href="{{ path("hotel") }}" class="nav-link">Hotels</a></li>
                 <li class="nav-item"><a href="{{ path("blog") }}" class="nav-link">Blog</a></li>
                 <li class="nav-item"><a href="{{ path("attraction") }}" class="nav-link">Attraction</a></li>
-                <li class="nav-item"><a href="{{ path("contact") }}" class="nav-link">Contact</a></li>
-                <li class="nav-item"><a href="{{ path("app_login") }}" class="nav-link">login</a></li>
+                <li class="nav-item"><a href="{{ path("reclamation_new") }}" class="nav-link">Reclamation</a></li>
+                {% if app.user == false %}
+                <li class="nav-item cta"><a href="{{ path("app_login") }}" class="nav-link">login</a></li>
+                {% endif %}
+                {% if app.user %}
+                <li class="nav-item"><a href="{{path("profile")}}" class="nav-link">{{app.user}}</a></li>
+                <li class="nav-item cta"><a href="{{ path("app_logout") }}" class="nav-link">logout</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
@@ -55,6 +60,7 @@
 {% block body %}
 {% endblock %}
 
+{% block footer %}
 <footer class="ftco-footer ftco-bg-dark ftco-section">
     <div class="container">
         <div class="row mb-5">
@@ -117,7 +123,7 @@
         </div>
     </div>
 </footer>
-
+{% endblock %}
 
 
 <!-- loader -->
