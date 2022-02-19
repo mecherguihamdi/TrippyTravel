@@ -1,0 +1,15 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+    {{ form_widget(form) }}
+{# Si la route est "excursions_edit on affiche images #}
+	{% if (app.request.attributes.get('_route') == 'excursion_edit' or app.request.attributes.get('_route') == 'excursion_show') %}
+        <h2>Image</h2>
+            <div>
+                <img src="{{ asset('/uploads/'~excursion.image) }}" alt="" width="150">
+
+                  </div>
+    {% endif %}
+    <button class="btn btn-primary me-2">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}
