@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Excursionimages;
+use App\Entity\Excursionimage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Excursionimages|null find($id, $lockMode = null, $lockVersion = null)
- * @method Excursionimages|null findOneBy(array $criteria, array $orderBy = null)
- * @method Excursionimages[]    findAll()
- * @method Excursionimages[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Excursionimage|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Excursionimage|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Excursionimage[]    findAll()
+ * @method Excursionimage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ExcursionimagesRepository extends ServiceEntityRepository
+class ExcursionimageRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Excursionimages::class);
+        parent::__construct($registry, Excursionimage::class);
     }
 
     // /**
-    //  * @return Excursionimages[] Returns an array of Excursionimages objects
+    //  * @return Excursionimage[] Returns an array of Excursionimage objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ExcursionimagesRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Excursionimages
+    public function findOneBySomeField($value): ?Excursionimage
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.exampleField = :val')
