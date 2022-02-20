@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Excursion;
+use App\Entity\Excursionimage;
 use App\Form\ExcursionimageType;
 use App\Form\ExcursionType;
 use App\Repository\ExcursionRepository;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 
 class ExcursionController extends AbstractController
@@ -56,11 +58,18 @@ class ExcursionController extends AbstractController
     /**
      * @Route("admin-dashboard/excursion/{id}", name="excursion_show", methods={"GET"})
      */
-    public function show(Excursion $excursion): Response
+    public function show(Excursion $excursion,UploaderHelper $helper): Response
     {
+        $arr_img = [];
+        $images = $excursion->getExcursionimages();
+        foreach ($images as $item){
+            $arr_img[] = $item->getImageName();
+        }
         return $this->render('excursion/show.html.twig', [
             'excursion' => $excursion,
             'categorie' => $excursion->getExcursioncategorie()->getLibelle(),
+            'images' => $images,
+//            'images' => $arr_img,
         ]);
     }
 

@@ -7,9 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 /**
  * @ORM\Entity(repositoryClass=ExcursionRepository::class)
+ * @Vich\Uploadable()
  */
 class Excursion
 {
@@ -63,7 +66,7 @@ class Excursion
 
 
     /**
-     * @ORM\OneToMany(targetEntity=Excursionimage::class, mappedBy="excursion")
+     * @ORM\OneToMany(targetEntity=Excursionimage::class, mappedBy="excursion", cascade={"persist", "remove"})
      */
     private $excursionimages;
 
@@ -163,10 +166,14 @@ class Excursion
 
     public function addExcursionimage(Excursionimage $excursionimage): self
     {
-        if (!$this->excursionimages->contains($excursionimage)) {
-            $this->excursionimages[] = $excursionimage;
-            $excursionimage->setExcursion($this);
-        }
+//        if (!$this->excursionimages->contains($excursionimage)) {
+//            $this->excursionimages[] = $excursionimage;
+//            $excursionimage->setExcursion($this);
+//        }
+//
+//        return $this;
+        $excursionimage->setExcursion($this);
+        $this->excursionimages[] = $excursionimage;
 
         return $this;
     }
@@ -181,6 +188,8 @@ class Excursion
         }
 
         return $this;
+//        $this->excursionimages->removeElement($excursionimage);
+//        return $this;
     }
 
 

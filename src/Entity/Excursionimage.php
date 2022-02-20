@@ -39,11 +39,15 @@ class Excursionimage
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Excursion::class, inversedBy="excursionimages",cascade={"persist","remove"})
+     * @ORM\ManyToOne(targetEntity=Excursion::class, inversedBy="excursionimages")
      */
     private $excursion;
 
-
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $file
+     *
+     * @return Excursionimage
+     */
     public function setImageFile(File $image = null)
     {
         $this->imageFile = $image;
@@ -55,16 +59,20 @@ class Excursionimage
             // if 'updatedAt' is not defined in your entity, use another property
             $this->updatedAt = new \DateTime('now');
         }
+        return $this;
     }
 
+    /**
+     * @return File|null
+     */
     public function getImageFile()
     {
         return $this->imageFile;
     }
 
-    public function setImageName(?string $imageName): void
+    public function setImageName(?string $name): void
     {
-        $this->imageName = $imageName;
+        $this->imageName = $name;
     }
 
     public function getImageName(): ?string
@@ -80,6 +88,23 @@ class Excursionimage
     public function setExcursion(?Excursion $excursion): self
     {
         $this->excursion = $excursion;
+
+        return $this;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

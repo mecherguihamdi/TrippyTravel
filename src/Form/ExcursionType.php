@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ExcursionType extends AbstractType
 {
@@ -26,16 +27,28 @@ class ExcursionType extends AbstractType
                     'choice_label' => 'libelle',
                     'required' => true,
                 ])
-            ->add('excursionimages', CollectionType::class, [
-                'entry_type' => ExcursionimageType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'required' => false,
-                'label'=>false,
-                'by_reference' => false,
-                'disabled' => false,
-            ])
-            ;
+//            ->add('excursionimages', CollectionType::class, [
+//                'entry_type' => ExcursionimageType::class,
+//                'allow_add' => true,
+//                'allow_delete' => true,
+//                'required' => true,
+//                'label'=>false,
+//                'by_reference' => false,
+//                'disabled' => false,
+//            ])
+            ->add(
+                'excursionimages',
+                CollectionType::class,
+                array(
+                    'entry_type' => ExcursionimageType::class,
+                    'by_reference' => false,
+                    'allow_add'    => true,
+                    'allow_delete' => true,
+                    'label' => 'Image(s) :',
+                    'prototype' => true,
+                )
+            )
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -44,4 +57,13 @@ class ExcursionType extends AbstractType
             'data_class' => Excursion::class,
         ]);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'appbundle_excursion';
+    }
+
 }
