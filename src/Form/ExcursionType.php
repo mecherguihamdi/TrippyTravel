@@ -4,10 +4,9 @@ namespace App\Form;
 
 use App\Entity\Excursion;
 use App\Entity\Excursioncategorie;
-use App\Entity\Excursionimages;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,13 +26,16 @@ class ExcursionType extends AbstractType
                     'choice_label' => 'libelle',
                     'required' => true,
                 ])
-            ->add('image', FileType::class, [
-                'data_class' => null,
-                'attr' => [
-                    'accept' => 'image/*',
-                    'multiple' => 'multiple'
-                ]
-            ]);
+            ->add('excursionimages', CollectionType::class, [
+                'entry_type' => ExcursionimageType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'required' => false,
+                'label'=>false,
+                'by_reference' => false,
+                'disabled' => false,
+            ])
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

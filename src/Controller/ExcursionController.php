@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Excursion;
+use App\Form\ExcursionimageType;
 use App\Form\ExcursionType;
 use App\Repository\ExcursionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,22 +37,11 @@ class ExcursionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /***/
-            $image = $form->get('image')->getData();
-            if ($image) {
-                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                $newFilename = $originalFilename . '_' . uniqid() . '.' . $image->guessExtension();
-                try {
-                    $image->move(
-                        $this->getParameter('images_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    echo $e->getMessage();
-                }
-                $excursion->setImage($newFilename);
+            $productImages = $excursion->getExcursionimages();
+            foreach($productImages as $key => $productImage){
+                $productImage->setExcursion($excursion);
+                $productImages->set($key,$productImage);
             }
-            /***/
             $entityManager->persist($excursion);
             $entityManager->flush();
             return $this->redirectToRoute('excursion_index', [], Response::HTTP_SEE_OTHER);
@@ -82,22 +72,11 @@ class ExcursionController extends AbstractController
         $form = $this->createForm(ExcursionType::class, $excursion);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            /***/
-            $image = $form->get('image')->getData();
-            if ($image) {
-                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                $newFilename = $originalFilename . '_' . uniqid() . '.' . $image->guessExtension();
-                try {
-                    $image->move(
-                        $this->getParameter('images_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    echo $e->getMessage();
-                }
-                $excursion->setImage($newFilename);
+            $productImages = $excursion->getExcursionimages();
+            foreach($productImages as $key => $productImage){
+                $productImage->setExcursion($excursion);
+                $productImages->set($key,$productImage);
             }
-            /***/
             $entityManager->flush();
             return $this->redirectToRoute('excursion_index', [], Response::HTTP_SEE_OTHER);
         }

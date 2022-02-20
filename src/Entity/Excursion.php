@@ -22,34 +22,34 @@ class Excursion
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
      */
     private $description;
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
      */
     private $programme;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
      */
     private $ville;
 
     /**
      * @ORM\Column(type="float")
-     * @Assert\NotBlank(message="ggggkujgjhg")
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
      * @Assert\Type(
      *     type="float",
-     *     message="ggg {{ value }} is not a valid {{ type }}."
+     *     message="La valeur {{ value }} est non valide {{ type }}."
      * )
      */
     private $prix;
@@ -57,20 +57,22 @@ class Excursion
     /**
      * @ORM\ManyToOne(targetEntity=Excursioncategorie::class, inversedBy="excursions")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
      */
     private $excursioncategorie;
 
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     * @Assert\Image()
-     * */
-    private $image;
+     * @ORM\OneToMany(targetEntity=Excursionimage::class, mappedBy="excursion")
+     */
+    private $excursionimages;
+
+
 
 
     public function __construct()
     {
+        $this->excursionimages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -151,18 +153,35 @@ class Excursion
     }
 
 
-    public function getImage(): ?string
+    /**
+     * @return Collection<int, Excursionimage>
+     */
+    public function getExcursionimages(): Collection
     {
-        return $this->image;
+        return $this->excursionimages;
     }
 
-    public function setImage(string $image): self
+    public function addExcursionimage(Excursionimage $excursionimage): self
     {
-        $this->image = $image;
+        if (!$this->excursionimages->contains($excursionimage)) {
+            $this->excursionimages[] = $excursionimage;
+            $excursionimage->setExcursion($this);
+        }
 
         return $this;
     }
 
+    public function removeExcursionimage(Excursionimage $excursionimage): self
+    {
+        if ($this->excursionimages->removeElement($excursionimage)) {
+            // set the owning side to null (unless already changed)
+            if ($excursionimage->getExcursion() === $this) {
+                $excursionimage->setExcursion(null);
+            }
+        }
+
+        return $this;
+    }
 
 
 }
