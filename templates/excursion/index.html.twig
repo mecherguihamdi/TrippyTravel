@@ -33,8 +33,13 @@
 
                                             <td>{{ excursion.prix }}</td>
                                             <td>
-                                                <a class="btn btn-info" href="{{ path('excursion_show', {'id': excursion.id}) }}">Afficher</a>
-                                                <a class="btn btn-dark btn-icon-text" href="{{ path('excursion_edit', {'id': excursion.id}) }}">Modifier<i class="ti-file btn-icon-append"></i></a>
+                                                <a href="{{ path('excursion_show', {'id': excursion.id}) }}" class="btn btn-outline-info btn-icon-text">
+                                                    <i class="mdi mdi-magnify-plus"></i>
+                                                </a>
+                                                <a href="{{ path('excursion_edit', {'id': excursion.id}) }}" class="btn btn-outline-info btn-icon-text">
+                                                    <i class="mdi mdi-lead-pencil"></i>
+                                                </a>
+                                                {{ include('excursion/_delete_form.html.twig') }}
                                             </td>
                                         </tr>
                                     {% else %}
