@@ -105,12 +105,15 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
         $rolesTab = array_map(function($role){
             return $role;
         }, $roles);
-        if (in_array('ROLE_ADMIN', $rolesTab)) {
-            return new RedirectResponse($this->urlGenerator->generate('admin-dashboard'));
-        }
-        else{
-            return new RedirectResponse($this->urlGenerator->generate('home'));
-        }
+            if (in_array('ROLE_ADMIN', $rolesTab)) {
+                return new RedirectResponse($this->urlGenerator->generate('admin-dashboard'));
+            }
+            else if(in_array('ROLE_CLIENT', $rolesTab)) {
+                return new RedirectResponse($this->urlGenerator->generate('home'));
+            }
+            else{
+                return new RedirectResponse($this->urlGenerator->generate('checkmail'));
+            }
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
