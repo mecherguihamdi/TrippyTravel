@@ -26,6 +26,14 @@
     <link rel="stylesheet" href="{{ asset('front-office/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('front-office/css/icomoon.css') }}">
     <link rel="stylesheet" href="{{ asset('front-office/css/style.css') }}">
+
+
+    <!-- inject:css:back -->
+    <link rel="stylesheet" href="{{ asset('back-office/vendors/mdi/css/materialdesignicons.min.css') }}">
+
+    
+
+    
 </head>
 <body>
 
@@ -50,9 +58,27 @@
                 <li class="nav-item cta"><a href="{{ path("app_login") }}" class="nav-link">login</a></li>
                 {% endif %}
                 {% if app.user %}
-                <li class="nav-item"><a href="{{path("profile")}}" class="nav-link">{{app.user}}</a></li>
-        
-                <li class="nav-item cta"><a href="{{ path("app_logout") }}" class="nav-link">logout</a></li>
+                
+                <li class="nav-item dropdown d-none d-lg-block user-dropdown">
+                    <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        {% if app.user.image == null %}
+                            <img class="img-md rounded-circle" src="{{asset('back-office/images/faces/146029.png')}}" height="30" width="30">
+                        {% endif %}
+                        <img class="img-xs rounded-circle" src="{{ asset('uploads/images/products/' ~ app.user.image) }}" alt="." height="30" width="30"> 
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                        <div class="dropdown-header text-center">
+                            {% if app.user.image == null %}
+                            <img class="img-md rounded-circle" src="{{asset('back-office/images/faces/146029.png')}}" height="30" width="30">
+                        {% endif %}
+                             <img class="img-xs rounded-circle" src="{{ asset('uploads/images/products/' ~ app.user.image) }}" alt="." height="30" width="30"> 
+                            <p class="mb-1 mt-3 font-weight-semibold">{{app.user}}</p>
+                            <p class="fw-light text-muted mb-0">{{app.user.email}}</p>
+                        </div>
+                        <a href="{{ path('profile') }}" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile </a>
+                        <a href="{{ path('reclamation_index_client') }}" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Reclamations</a>
+                        <a href="{{ path("app_logout") }}" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Logout</a>
+                    </div>
+                </li>
                 {% endif %}
             </ul>
         </div>

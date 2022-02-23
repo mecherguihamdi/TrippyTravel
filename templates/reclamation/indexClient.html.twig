@@ -28,6 +28,7 @@
             <tr>
                 <th>Id</th>
                 <th>Object</th>
+                <th>Type</th>
                 <th>CreatedAt</th>
                 <th>actions</th>
             </tr>
@@ -37,6 +38,7 @@
             <tr>
                 <td>{{ reclamation.id }}</td>
                 <td>{{ reclamation.object }}</td>
+                <td>{{ reclamation.type }}</td>
                 <td>{{ reclamation.createdAt ? reclamation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('reclamation_show', {'id': reclamation.id}) }}">show</a>
