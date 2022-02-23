@@ -14,28 +14,17 @@ class ExcursionimageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-//        $builder->add('imageFile',VichImageType::class)
         $builder
-//            ->add(
-//                'imageFile',
-//                FileType::class,
-//                array(
-//                    'attr' => array(
-//                        'placeholder' => 'Images'
-//                    ),
-//                    'required' => false,
-//                    'label'        => 'Images :',
-//                )
-//            )
         ->add(
         'imageFile',
         VichImageType::class,
         array(
             'attr' => array(
-                'placeholder' => 'Images'
+                'label'=>'none',
+                'accept' => 'image/*'
             ),
             'required' => false,
-            'label'        => 'Images :',
+
         )
     );
     }

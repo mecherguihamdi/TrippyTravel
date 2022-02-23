@@ -6,6 +6,8 @@ use App\Entity\Excursioncategorie;
 use App\Form\ExcursioncategorieType;
 use App\Repository\ExcursioncategorieRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Flasher\Prime\FlasherInterface;
+use Flasher\SweetAlert\Prime\SweetAlertFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +28,7 @@ class ExcursioncategorieController extends AbstractController
     /**
      * @Route("admin-dashboard//excursioncategorie/new", name="excursioncategorie_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,FlasherInterface $flasher): Response
     {
         $excursioncategorie = new Excursioncategorie();
         $form = $this->createForm(ExcursioncategorieType::class, $excursioncategorie);
@@ -35,7 +37,7 @@ class ExcursioncategorieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($excursioncategorie);
             $entityManager->flush();
-
+            $flasher->addSuccess('Ajouté avec succés!');
             return $this->redirectToRoute('excursioncategorie_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -58,14 +60,14 @@ class ExcursioncategorieController extends AbstractController
     /**
      * @Route("admin-dashboard//excursioncategorie/{id}/edit", name="excursioncategorie_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Excursioncategorie $excursioncategorie, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Excursioncategorie $excursioncategorie, EntityManagerInterface $entityManager,FlasherInterface $flasher): Response
     {
         $form = $this->createForm(ExcursioncategorieType::class, $excursioncategorie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
+            $flasher->addSuccess('Modifié avec succés!');
             return $this->redirectToRoute('excursioncategorie_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -78,11 +80,12 @@ class ExcursioncategorieController extends AbstractController
     /**
      * @Route("admin-dashboard//excursioncategorie/{id}", name="excursioncategorie_delete", methods={"POST"})
      */
-    public function delete(Request $request, Excursioncategorie $excursioncategorie, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Excursioncategorie $excursioncategorie, EntityManagerInterface $entityManager,SweetAlertFactory $flasher): Response
     {
         if ($this->isCsrfTokenValid('delete'.$excursioncategorie->getId(), $request->request->get('_token'))) {
             $entityManager->remove($excursioncategorie);
             $entityManager->flush();
+            $flasher->addSuccess('Supprimé avec succès');
         }
 
         return $this->redirectToRoute('excursioncategorie_index', [], Response::HTTP_SEE_OTHER);

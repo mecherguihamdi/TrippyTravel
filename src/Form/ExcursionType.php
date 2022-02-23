@@ -27,15 +27,6 @@ class ExcursionType extends AbstractType
                     'choice_label' => 'libelle',
                     'required' => true,
                 ])
-//            ->add('excursionimages', CollectionType::class, [
-//                'entry_type' => ExcursionimageType::class,
-//                'allow_add' => true,
-//                'allow_delete' => true,
-//                'required' => true,
-//                'label'=>false,
-//                'by_reference' => false,
-//                'disabled' => false,
-//            ])
             ->add(
                 'excursionimages',
                 CollectionType::class,

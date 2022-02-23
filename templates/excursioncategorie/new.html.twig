@@ -9,14 +9,21 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">categorie excursion</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="card-title">CategorieExcursion</h4>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <a href="{{ path('excursioncategorie_index') }}" class="btn btn-outline-light btn-icon-text"><i
+                                                class="mdi mdi-arrow-left btn-icon-prepend"></i></a>
+                                </div>
+                            </div>
                             <p class="card-description">
                                 Ajouter
                             </p>
 
                             {{ include('excursioncategorie/_form.html.twig') }}
 
-                            <a class="btn btn btn-warning" href="{{ path('excursioncategorie_index') }}">retour à la liste</a>
                         </div>
                     </div>
                 </div>

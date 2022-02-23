@@ -6,6 +6,8 @@ use App\Repository\ExcursionimageRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=ExcursionimageRepository::class)
@@ -23,6 +25,11 @@ class Excursionimage
     /**
      * @Vich\UploadableField(mapping="excursion_images", fileNameProperty="imageName")
      * @var File
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"image/jpg", "image/jpeg", "image/gif", "image/png"},
+     *     mimeTypesMessage = "Veuillez télécharger une image valide"
+     * )
      */
     private $imageFile;
 

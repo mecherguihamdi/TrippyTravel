@@ -104,6 +104,24 @@
     "phar-io/version": {
         "version": "3.1.1"
     },
+    "php-flasher/flasher": {
+        "version": "v0.9.6"
+    },
+    "php-flasher/flasher-sweet-alert": {
+        "version": "v0.9.6"
+    },
+    "php-flasher/flasher-sweet-alert-symfony": {
+        "version": "v0.9.6"
+    },
+    "php-flasher/flasher-symfony": {
+        "version": "v0.9.6"
+    },
+    "php-flasher/flasher-toastr": {
+        "version": "v0.9.6"
+    },
+    "php-flasher/flasher-toastr-symfony": {
+        "version": "v0.9.6"
+    },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
     },

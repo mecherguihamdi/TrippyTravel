@@ -67,6 +67,7 @@ class Excursion
 
     /**
      * @ORM\OneToMany(targetEntity=Excursionimage::class, mappedBy="excursion", cascade={"persist", "remove"})
+     * @Assert\Valid()
      */
     private $excursionimages;
 

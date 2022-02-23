@@ -9,8 +9,19 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h1>Excursion</h1>
-
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="card-title">Excursion</h4>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <div class="btn-group">
+                                        <a href="{{ path('excursion_index') }}"
+                                           class="btn btn-outline-light btn-icon-text"><i
+                                                    class="mdi mdi-arrow-left btn-icon-prepend"></i></a>
+                                        {{ include('excursion/_delete_form.html.twig') }}
+                                    </div>
+                                </div>
+                            </div>
                             <table class="table">
                                 <tbody>
                                 <tr>
@@ -45,19 +56,17 @@
                             </table>
                             <div class="row">
                                 {% for f in excursion.excursionimages %}
-                                <div class="col-md-12">
+                                    <div class="col-md-4">
 
-                                    <img class="img-thumbnail" src="{{ vich_uploader_asset(f, 'imageFile') }}"/>
-                                    {% endfor %}
-                                </div>
+                                        <img class="img-thumbnail" src="{{ vich_uploader_asset(f, 'imageFile') }}"/>
+                                    </div>
+                                {% endfor %}
                             </div>
 
+                            <a class="btn btn-outline-primary btn-icon-text"
+                               href="{{ path('excursion_edit', {'id': excursion.id}) }}"><i
+                                        class="mdi mdi-grease-pencil"></i></a>
 
-                            <a class="btn btn-success" href="{{ path('excursion_index') }}">retour à la liste</a>
-
-                            <a class="btn btn btn-warning" href="{{ path('excursion_edit', {'id': excursion.id}) }}">Modifier</a>
-
-                            {{ include('excursion/_delete_form.html.twig') }}
                         </div>
                     </div>
                 </div>

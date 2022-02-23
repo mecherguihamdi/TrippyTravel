@@ -28,7 +28,7 @@ class Excursioncategorie
     private $libelle;
 
     /**
-     * @ORM\OneToMany(targetEntity=Excursion::class, mappedBy="excursioncategorie")
+     * @ORM\OneToMany(targetEntity=Excursion::class, mappedBy="excursioncategorie", cascade={"persist", "remove"})
      */
     private $excursions;
 

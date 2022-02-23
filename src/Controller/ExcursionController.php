@@ -8,6 +8,9 @@ use App\Form\ExcursionimageType;
 use App\Form\ExcursionType;
 use App\Repository\ExcursionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Flasher\Prime\FlasherInterface;
+use Flasher\SweetAlert\Prime\SweetAlertFactory;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +24,7 @@ class ExcursionController extends AbstractController
     /**
      * @Route("admin-dashboard/excursion/", name="excursion_index", methods={"GET"})
      */
-    public function index(ExcursionRepository $excursionRepository): Response
+    public function index(ExcursionRepository $excursionRepository,ToastrFactory $flasher): Response
     {
         return $this->render('excursion/index.html.twig', [
             'excursions' => $excursionRepository->findAll(),
@@ -32,7 +35,7 @@ class ExcursionController extends AbstractController
     /**
      * @Route("admin-dashboard/excursion/new", name="excursion_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,FlasherInterface $flasher): Response
     {
         $excursion = new Excursion();
         $form = $this->createForm(ExcursionType::class, $excursion);
@@ -46,7 +49,9 @@ class ExcursionController extends AbstractController
             }
             $entityManager->persist($excursion);
             $entityManager->flush();
+            $flasher->addSuccess('Ajouté avec succés!');
             return $this->redirectToRoute('excursion_index', [], Response::HTTP_SEE_OTHER);
+//            $flasher->addSuccess('Data has been saved successfully!');
         }
 
         return $this->render('excursion/new.html.twig', [
@@ -69,14 +74,13 @@ class ExcursionController extends AbstractController
             'excursion' => $excursion,
             'categorie' => $excursion->getExcursioncategorie()->getLibelle(),
             'images' => $images,
-//            'images' => $arr_img,
         ]);
     }
 
     /**
      * @Route("admin-dashboard/excursion/{id}/edit", name="excursion_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Excursion $excursion, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Excursion $excursion, EntityManagerInterface $entityManager,FlasherInterface $flasher): Response
     {
         $form = $this->createForm(ExcursionType::class, $excursion);
         $form->handleRequest($request);
@@ -87,6 +91,7 @@ class ExcursionController extends AbstractController
                 $productImages->set($key,$productImage);
             }
             $entityManager->flush();
+            $flasher->addSuccess('Modifié avec succés!');
             return $this->redirectToRoute('excursion_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -99,13 +104,13 @@ class ExcursionController extends AbstractController
     /**
      * @Route("admin-dashboard/excursion/{id}", name="excursion_delete", methods={"POST"})
      */
-    public function delete(Request $request, Excursion $excursion, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Excursion $excursion, EntityManagerInterface $entityManager,SweetAlertFactory $flasher): Response
     {
         if ($this->isCsrfTokenValid('delete'.$excursion->getId(), $request->request->get('_token'))) {
             $entityManager->remove($excursion);
             $entityManager->flush();
+            $flasher->addSuccess('Supprimé avec succès');
         }
-
         return $this->redirectToRoute('excursion_index', [], Response::HTTP_SEE_OTHER);
     }
 

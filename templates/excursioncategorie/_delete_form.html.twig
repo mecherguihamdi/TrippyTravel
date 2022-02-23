@@ -1,4 +1,4 @@
-<form method="post" action="{{ path('excursioncategorie_delete', {'id': excursioncategorie.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+<form method="post" action="{{ path('excursioncategorie_delete', {'id': excursioncategorie.id}) }}" >
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ excursioncategorie.id) }}">
-    <button class="btn btn-danger">Supprimer</button>
+    <a type="button"  id="btn-ok"  class=" btn btn-outline-danger btn-icon-text"><i class="mdi mdi-delete"></i></a>
 </form>
