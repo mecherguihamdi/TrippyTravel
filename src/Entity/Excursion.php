@@ -77,6 +77,11 @@ class Excursion
      */
     private $duration;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Excursionreservation::class, mappedBy="excursion", cascade={"persist", "remove"})
+     */
+    private $excursionreservation;
+
 
 
 
@@ -207,6 +212,23 @@ class Excursion
     public function setDuration(string $duration): self
     {
         $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getExcursionreservation(): ?Excursionreservation
+    {
+        return $this->excursionreservation;
+    }
+
+    public function setExcursionreservation(Excursionreservation $excursionreservation): self
+    {
+        // set the owning side of the relation if necessary
+        if ($excursionreservation->getExcursion() !== $this) {
+            $excursionreservation->setExcursion($this);
+        }
+
+        $this->excursionreservation = $excursionreservation;
 
         return $this;
     }

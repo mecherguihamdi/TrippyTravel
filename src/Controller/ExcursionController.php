@@ -64,7 +64,7 @@ class ExcursionController extends AbstractController
     /**
      * @Route("admin-dashboard/excursion/{id}", name="excursion_show", methods={"GET"})
      */
-    public function show(Excursion $excursion,UploaderHelper $helper): Response
+    public function show(Excursion $excursion): Response
     {
         $arr_img = [];
         $images = $excursion->getExcursionimages();

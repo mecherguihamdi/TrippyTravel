@@ -10,6 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Excursionreservation
 {
+    public function __construct() {
+        $this->setCreatedAt(new \DateTime());
+    }
+    const RESERVATION_EXCURSION_DEFAULT = "reservation.non_paye";
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -25,13 +29,19 @@ class Excursionreservation
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $status;
+    private $status=self::RESERVATION_EXCURSION_DEFAULT;
 
     /**
      * @ORM\Column(type="datetime", options={"default"="CURRENT_TIMESTAMP"})
      * @var \DateTime
      */
     private $createdAt;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Excursion::class, inversedBy="excursionreservation")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $excursion;
 
     public function getId(): ?int
     {
@@ -69,6 +79,18 @@ class Excursionreservation
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getExcursion(): ?Excursion
+    {
+        return $this->excursion;
+    }
+
+    public function setExcursion(Excursion $excursion): self
+    {
+        $this->excursion = $excursion;
 
         return $this;
     }
