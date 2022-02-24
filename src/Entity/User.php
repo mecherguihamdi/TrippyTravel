@@ -70,7 +70,7 @@ class User implements UserInterface
     private $lastname;
 
      /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
     private $image;
@@ -82,7 +82,7 @@ class User implements UserInterface
     private $imageFile;
 
      /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime",nullable=true)
      * @var \DateTime
      */
     private $updatedAt;
@@ -245,12 +245,7 @@ class User implements UserInterface
     public function setImageFile($image = null)
     {
         $this->imageFile = $image;
-
-        // VERY IMPORTANT:
-        // It is required that at least one field changes if you are using Doctrine,
-        // otherwise the event listeners won't be called and the file is lost
         if ($image) {
-            // if 'updatedAt' is not defined in your entity, use another property
             $this->updatedAt = new \DateTime('now');
         }
     }

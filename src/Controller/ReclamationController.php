@@ -49,7 +49,7 @@ class ReclamationController extends AbstractController
             $entityManager->persist($reclamation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('reclamation_index_client', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('reclamation/new.html.twig', [
@@ -61,11 +61,36 @@ class ReclamationController extends AbstractController
     /**
      * @Route("/admin-dashboard/reclamation/{id}", name="reclamation_show", methods={"GET"})
      */
-    public function show(Reclamation $reclamation): Response
+    public function show(Reclamation $reclamation, EntityManagerInterface $entityManager): Response
     {
+        $reclamation->setStatus("seen");
+        $entityManager->persist($reclamation);
+        $entityManager->flush();
         return $this->render('reclamation/show.html.twig', [
             'reclamation' => $reclamation,
         ]);
+    }
+
+    /**
+     * @Route("/admin-dashboard/reclamation/take/{id}", name="reclamation_take", methods={"GET", "POST"})
+     */
+    public function take(Reclamation $reclamation, EntityManagerInterface $entityManager): Response
+    {
+        $reclamation->setStatus("in progress");
+        $entityManager->persist($reclamation);
+        $entityManager->flush();
+        return $this->redirectToRoute('reclamation_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/admin-dashboard/reclamation/done/{id}", name="reclamation_done", methods={"GET", "POST"})
+     */
+    public function done(Reclamation $reclamation, EntityManagerInterface $entityManager): Response
+    {
+        $reclamation->setStatus("done");
+        $entityManager->persist($reclamation);
+        $entityManager->flush();
+        return $this->redirectToRoute('reclamation_index', [], Response::HTTP_SEE_OTHER);
     }
 
     /**

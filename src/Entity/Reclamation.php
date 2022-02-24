@@ -46,12 +46,18 @@ class Reclamation
      * @ORM\ManyToOne(targetEntity=TypeRec::class, inversedBy="reclamations")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $type;  
+    private $type;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;  
 
 
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+            $this->status = "waiting";
     }
     
 
@@ -116,6 +122,18 @@ class Reclamation
     public function setType(?TypeRec $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

@@ -28,6 +28,7 @@
                                             <th>sender</th>
                                             <th>Object</th>
                                             <th>Type</th>
+                                            <th>Status</th>
                                             <th>CreatedAt</th>
                                             <th>actions</th>
                                             
@@ -44,6 +45,18 @@
                                             </td>
                                             <td>{{ reclamation.object }}</td>
                                             <td>{{ reclamation.type }}</td>
+                                            {% if reclamation.status == "done" %}
+                                                <td><FONT COLOR="green"><strong>{{ reclamation.status }}</td>
+                                                {% endif %}
+                                                {% if reclamation.status == "waiting" %}
+                                                <td><FONT COLOR="red"><strong>{{ reclamation.status }}</td>
+                                                {% endif %}
+                                                {% if reclamation.status == "in progress" %}
+                                                <td><FONT COLOR="blue"><strong>{{ reclamation.status }}</td>
+                                                {% endif %}
+                                                {% if reclamation.status == "seen" %}
+                                                <td><strong>{{ reclamation.status }}</td>
+                                            {% endif %}
                                             <td>{{ reclamation.createdAt ? reclamation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                                             <td>
                                                 <div class="btn-group">
