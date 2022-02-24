@@ -29,7 +29,7 @@ class AccessDeniedListener implements EventSubscriberInterface
         // ... perform some action (e.g. logging)
 
         // optionally set the custom response
-        $event->setResponse(new Response("impossible", 403));
+        $event->setResponse(new Response("you are not authorized to access this page !", 403));
 
         // or stop propagation (prevents the next exception listeners from being called)
         //$event->stopPropagation();
