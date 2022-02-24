@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Flasher\Prime\FlasherInterface;
 use Flasher\SweetAlert\Prime\SweetAlertFactory;
 use Flasher\Toastr\Prime\ToastrFactory;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -118,10 +119,15 @@ class ExcursionController extends AbstractController
     /**
      * @Route("excursion/", name="excursion_index_front", methods={"GET"})
      */
-    public function index_front(ExcursionRepository $excursionRepository): Response
+    public function index_front(ExcursionRepository $excursionRepository,Request $request, PaginatorInterface $paginator): Response
     {
+            $excursions = $paginator->paginate(
+                $excursionRepository->findAll(), // Requête contenant les données à paginer (ici nos articles)
+                $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            10 // Nombre de résultats par page
+        );
         return $this->render('excursion/front_index.html.twig', [
-            'excursions' => $excursionRepository->findAll(),
+            'excursions' => $excursions,
         ]);
     }
 

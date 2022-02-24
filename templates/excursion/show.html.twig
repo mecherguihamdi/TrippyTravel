@@ -22,40 +22,46 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    <th>Id</th>
-                                    <td>{{ excursion.id }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Libelle</th>
-                                    <td>{{ excursion.libelle }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Description</th>
+                            <div class="table-responsive pt-3">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <th>Id</th>
+                                        <td>{{ excursion.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Durée</th>
+                                        <td>{{ excursion.duration }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Libelle</th>
+                                        <td>{{ excursion.libelle }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Description</th>
 
-                                    <td>{{ excursion.description|raw  }}</td>
+                                        <td>{{ excursion.description|raw  }}</td>
 
-                                </tr>
-                                <tr>
-                                    <th>Programme</th>
-                                    <td>{{ excursion.programme|raw }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Ville</th>
-                                    <td>{{ excursion.ville }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Prix</th>
-                                    <td>{{ excursion.prix }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Catégorie</th>
-                                    <td>{{ categorie }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                    </tr>
+                                    <tr>
+                                        <th>Programme</th>
+                                        <td>{{ excursion.programme|raw }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ville</th>
+                                        <td>{{ excursion.ville }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Prix</th>
+                                        <td>{{ excursion.prix }}DT</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Catégorie</th>
+                                        <td>{{ categorie }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             <div class="row">
                                 {% for f in excursion.excursionimages %}
                                     <div class="col-md-4">
