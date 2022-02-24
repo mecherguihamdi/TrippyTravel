@@ -15,6 +15,7 @@ class ReclamationType extends AbstractType
         $builder
             ->add('object')
             ->add('description')
+            ->add('type')
         ;
     }
 
@@ -22,6 +23,7 @@ class ReclamationType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Reclamation::class,
+            'required' => false
         ]);
     }
 }

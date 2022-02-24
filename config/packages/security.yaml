@@ -35,4 +35,4 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/admin-dashboard, roles: ROLE_ADMIN }
-        # - { path: ^/trippy, roles: ROLE_CLIENT }
+         - { path: ^/trippy, roles: ROLE_CLIENT }

@@ -26,7 +26,17 @@ class ReclamationController extends AbstractController
     }
 
     /**
-     * @Route("/reclamation/new", name="reclamation_new", methods={"GET", "POST"})
+     * @Route("/trippy/reclamation", name="reclamation_index_client", methods={"GET"})
+     */
+    public function indexClient(ReclamationRepository $reclamationRepository): Response
+    {
+        return $this->render('reclamation/indexClient.html.twig', [
+            'reclamations' => $reclamationRepository->findBy(['client' => $this->getUser()]),
+        ]);
+    }
+
+    /**
+     * @Route("/trippy/reclamation/new", name="reclamation_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {

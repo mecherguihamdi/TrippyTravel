@@ -32,7 +32,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/profile", name="profile")
+     * @Route("/trippy/profile", name="profile")
      */
     public function editProfile(Request $request)
     {
@@ -45,6 +45,7 @@ class UserController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+            $user->setImageFile(null);      
 
             $this->addFlash('message', 'Profil mis à jour');
             return $this->redirectToRoute('home');
@@ -68,6 +69,7 @@ class UserController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+            $user->setImageFile(null);      
 
             $this->addFlash('message', 'Profil mis à jour');
             return $this->redirectToRoute('admin-dashboard');

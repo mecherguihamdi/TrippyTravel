@@ -73,24 +73,28 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/verify", name="registration_confirmation_route")
      */
-    public function verifyUserEmail(Request $request): Response
+    public function verifyUserEmail(Request $request, EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
 
-        // Do not get the User's Id or Email Address from the Request object
-        try {
-            $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
-        } catch (VerifyEmailExceptionInterface $e) {
-            $this->addFlash('verify_email_error', $e->getReason());
-
-            return $this->redirectToRoute('app_register');
-        }
+       
 
         // Mark your user as verified. e.g. switch a User::verified property to true
+        $user->setIsVerified(true);
+        $user->setRoles(array("ROLE_CLIENT"));
+        $entityManager->persist($user);
+        $entityManager->flush();
 
         $this->addFlash('success', 'Your e-mail address has been verified.');
 
         return $this->redirectToRoute('app_login');
+    }
+    /**
+     * @Route("/checkmail", name="checkmail")
+     */
+    public function check(): Response
+    {
+        return $this->render('registration/checkmail.html.twig');
     }
 }

@@ -21,13 +21,13 @@ class Reclamation
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="object should not be blank")
      */
     private $object;
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="write something")
      */
     private $description;
 
@@ -40,7 +40,13 @@ class Reclamation
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reclamations")
      * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
      */
-    private $client;   
+    private $client;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=TypeRec::class, inversedBy="reclamations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $type;  
 
 
     public function __construct()
@@ -99,6 +105,18 @@ class Reclamation
     public function setClient(?User $client): self
     {
         $this->client = $client; 
+        return $this;
+    }
+
+    public function getType(): ?TypeRec
+    {
+        return $this->type;
+    }
+
+    public function setType(?TypeRec $type): self
+    {
+        $this->type = $type;
+
         return $this;
     }
 
