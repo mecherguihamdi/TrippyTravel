@@ -4,9 +4,11 @@ namespace App\Form;
 
 use App\Entity\Excursion;
 use App\Entity\Excursioncategorie;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
@@ -17,8 +19,12 @@ class ExcursionType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('description')
-            ->add('programme')
+            ->add('duration',TextType::class,[
+                    'attr' => ['label' => 'durée']
+                ]
+            )
+            ->add('description', CKEditorType::class)
+            ->add('programme', CKEditorType::class)
             ->add('ville')
             ->add('prix')
             ->add('excursioncategorie', EntityType::class,

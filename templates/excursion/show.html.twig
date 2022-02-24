@@ -34,11 +34,13 @@
                                 </tr>
                                 <tr>
                                     <th>Description</th>
-                                    <td>{{ excursion.description }}</td>
+
+                                    <td>{{ excursion.description|raw  }}</td>
+
                                 </tr>
                                 <tr>
                                     <th>Programme</th>
-                                    <td>{{ excursion.programme }}</td>
+                                    <td>{{ excursion.programme|raw }}</td>
                                 </tr>
                                 <tr>
                                     <th>Ville</th>

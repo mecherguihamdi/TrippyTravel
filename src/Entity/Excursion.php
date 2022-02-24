@@ -71,6 +71,12 @@ class Excursion
      */
     private $excursionimages;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
+     */
+    private $duration;
+
 
 
 
@@ -191,6 +197,18 @@ class Excursion
         return $this;
 //        $this->excursionimages->removeElement($excursionimage);
 //        return $this;
+    }
+
+    public function getDuration(): ?string
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(string $duration): self
+    {
+        $this->duration = $duration;
+
+        return $this;
     }
 
 
