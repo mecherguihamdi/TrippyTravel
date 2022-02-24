@@ -70,7 +70,11 @@ class User implements UserInterface
     private $lastname;
 
      /**
+<<<<<<< HEAD
      * @ORM\Column(type="string", length=255, nullable=true)
+=======
+     * @ORM\Column(type="string", length=255)
+>>>>>>> 23237ae5853df956539087ac877ac45710134ae5
      * @var string
      */
     private $image;
@@ -82,7 +86,11 @@ class User implements UserInterface
     private $imageFile;
 
      /**
+<<<<<<< HEAD
      * @ORM\Column(type="datetime",nullable=true)
+=======
+     * @ORM\Column(type="datetime")
+>>>>>>> 23237ae5853df956539087ac877ac45710134ae5
      * @var \DateTime
      */
     private $updatedAt;
@@ -245,7 +253,16 @@ class User implements UserInterface
     public function setImageFile($image = null)
     {
         $this->imageFile = $image;
+<<<<<<< HEAD
         if ($image) {
+=======
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            // if 'updatedAt' is not defined in your entity, use another property
+>>>>>>> 23237ae5853df956539087ac877ac45710134ae5
             $this->updatedAt = new \DateTime('now');
         }
     }

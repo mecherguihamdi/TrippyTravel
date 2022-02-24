@@ -19,7 +19,11 @@
       <div class="container">
         <div class="row d-flex mb-5 contact-info">
           <div class="col-md-12 mb-4">
+<<<<<<< HEAD
             <h2 class="h4">List Reclamation</h2>
+=======
+            <h2 class="h4">Détails Reclamation</h2>
+>>>>>>> 23237ae5853df956539087ac877ac45710134ae5
           </div>
         </div>
         
@@ -30,7 +34,11 @@
                 <th>Object</th>
                 <th>Type</th>
                 <th>CreatedAt</th>
+<<<<<<< HEAD
                 <th>Status</th>
+=======
+                <th>actions</th>
+>>>>>>> 23237ae5853df956539087ac877ac45710134ae5
             </tr>
         </thead>
         <tbody>
@@ -40,6 +48,7 @@
                 <td>{{ reclamation.object }}</td>
                 <td>{{ reclamation.type }}</td>
                 <td>{{ reclamation.createdAt ? reclamation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+<<<<<<< HEAD
                 {% if reclamation.status == "done" %}
                 <td><FONT COLOR="green"><strong>{{ reclamation.status }}</td>
                 {% endif %}
@@ -54,6 +63,11 @@
                 {% endif %}
 
 
+=======
+                <td>
+                    <a href="{{ path('reclamation_show', {'id': reclamation.id}) }}">show</a>
+                </td>
+>>>>>>> 23237ae5853df956539087ac877ac45710134ae5
             </tr>
         {% else %}
             <tr>
