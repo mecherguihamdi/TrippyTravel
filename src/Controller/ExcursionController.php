@@ -27,12 +27,35 @@ use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 class ExcursionController extends AbstractController
 {
     /**
-     * @Route("admin-dashboard/excursion/", name="excursion_index", methods={"GET"})
+     * @Route("admin-dashboard/excursion/", name="excursion_index", methods={"GET","POST"})
      */
-    public function index(ExcursionRepository $excursionRepository,ToastrFactory $flasher): Response
+    public function index(Request $request, ExcursionRepository $excursionRepository,ToastrFactory $flasher): Response
     {
+        $excursions = $excursionRepository->findAll();
+        $form = $this->createFormBuilder(null)
+            ->add('query', TextType::class,[
+                'required' => false,
+                'label'=>false
+            ])
+            ->add('chercher', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary'
+                ]
+            ])
+            ->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $re = $request->get('form');
+            $excursions = $excursionRepository->createQueryBuilder('e')
+                ->where('e.libelle LIKE :lib')
+                ->setParameter('lib','%'.$re['query'].'%')
+                ->getQuery()
+                ->getResult();
+        }
         return $this->render('excursion/index.html.twig', [
-            'excursions' => $excursionRepository->findAll(),
+            'excursions' => $excursions,
+            'form' => $form->createView(),
         ]);
     }
 
