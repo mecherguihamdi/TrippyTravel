@@ -3,10 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\MaisonshotesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=MaisonshotesRepository::class)
+ *  @Vich\Uploadable
  */
 class Maisonshotes
 {
@@ -24,22 +29,35 @@ class Maisonshotes
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\
+     * Length(max=10)
      */
+
     private $libelle;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\
+     * Length(max=10)
      */
+
+
     private $capacite;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\
+     * Length(max=10)
      */
+
     private $localisation;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\
+     * Length(max=10)
      */
+
     private $proprietaire;
 
     /**
@@ -56,6 +74,16 @@ class Maisonshotes
      * @ORM\ManyToOne(targetEntity=TypeMaison::class, inversedBy="maisons")
      */
     private $typeMaison;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Maisonhoteimage::class, mappedBy="maisonshotes", cascade={"persist", "remove"})
+     */
+    private $maisonhotesimages;
+
+    public function __construct()
+    {
+        $this->maisonhotesimages = new ArrayCollection();
+    }
 
 
 
@@ -154,6 +182,38 @@ class Maisonshotes
         return $this;
     }
 
+    /**
+     * @return Collection|Maisonhoteimage[]
+     */
+    public function getMaisonhotesimages(): Collection
+    {
+        return $this->maisonhotesimages;
+    }
+
+    public function addMaisonhotesimage(Maisonhoteimage $maisonhotesimage): self
+    {
+        if (!$this->maisonhotesimages->contains($maisonhotesimage)) {
+            $this->maisonhotesimages[] = $maisonhotesimage;
+            $maisonhotesimage->setMaisonshotes($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMaisonhotesimage(Maisonhoteimage $maisonhotesimage): self
+    {
+        if ($this->maisonhotesimages->removeElement($maisonhotesimage)) {
+            // set the owning side to null (unless already changed)
+            if ($maisonhotesimage->getMaisonshotes() === $this) {
+                $maisonhotesimage->setMaisonshotes(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString(){
+
+    }
 
 
 }

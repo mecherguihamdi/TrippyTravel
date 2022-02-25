@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Maisonshotes;
-use App\Form\Maisonshotes1Type;
+
 use App\Form\MaisonshotesType;
 use App\Repository\MaisonshotesRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,16 +13,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/maisonshotes")
+ * @Route("/")
  */
 class MaisonshotesController extends AbstractController
 {
     /**
-     * @Route("/", name="maisonshotes_index", methods={"GET"})
+     * @Route("/maisonshotes", name="maisonshotes_index", methods={"GET"})
      */
     public function index(MaisonshotesRepository $maisonshotesRepository): Response
     {
-        return $this->render('maisonshotes/index.html.twig', [
+        return $this->render('maisonshotes/indexfront.html.twig', [
             'maisonshotes' => $maisonshotesRepository->findAll(),
         ]);
     }
@@ -53,7 +53,7 @@ class MaisonshotesController extends AbstractController
             $entityManager->persist($maisonshote);
             $entityManager->flush();
 
-            return $this->redirectToRoute('maisonshotes_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin-dashboard/maisonshote', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('maisonshotes/new.html.twig', [
@@ -63,7 +63,7 @@ class MaisonshotesController extends AbstractController
     }
 
     /**
-     * @Route("/{ref}", name="maisonshotes_show", methods={"GET"})
+     * @Route("/{id}", name="maisonshotes_show", methods={"GET"})
      */
     public function show(Maisonshotes $maisonshote): Response
     {
@@ -73,7 +73,7 @@ class MaisonshotesController extends AbstractController
     }
 
     /**
-     * @Route("/{ref}/edit", name="maisonshotes_edit", methods={"GET", "POST"})
+     * @Route("/edit/{id}", name="maisonshotes_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Maisonshotes $maisonshote, EntityManagerInterface $entityManager): Response
     {
@@ -93,15 +93,15 @@ class MaisonshotesController extends AbstractController
     }
 
     /**
-     * @Route("/{ref}", name="maisonshotes_delete", methods={"POST"})
+     * @Route("/{id}", name="maisonshotes_delete", methods={"POST"})
      */
     public function delete(Request $request, Maisonshotes $maisonshote, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$maisonshote->getRef(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$maisonshote->getId(), $request->request->get('_token'))) {
             $entityManager->remove($maisonshote);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('maisonshotes_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin-dashboard/maisonshote', [], Response::HTTP_SEE_OTHER);
     }
 }
