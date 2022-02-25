@@ -7,6 +7,7 @@
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <button class="btn btn-warning">{{ button_label|default('Save') }}</button>
+    <a href="{{ path('admin-dashboard/categorie_attraction') }}" class="btn btn-warning" style="float:right">back to list</a>
     {{ form_end(form) }}
 </div>
 </div>
