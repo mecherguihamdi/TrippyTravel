@@ -23,7 +23,7 @@ class CategorieAttraction
     /**
      * @ORM\Column(type="string", length=20)
      * @Assert\
-     * Length(max=20)
+     * NotBlank(message="Inserer un libelle svp")
      */
     private $libelle;
 
@@ -33,7 +33,7 @@ class CategorieAttraction
     private $contrainteAge;
 
     /**
-     * @ORM\OneToMany(targetEntity=Attraction::class, mappedBy="id_categorie")
+     * @ORM\OneToMany(targetEntity=Attraction::class, mappedBy="id_categorie", cascade={"persist", "remove"})
      */
     private $attractions;
 

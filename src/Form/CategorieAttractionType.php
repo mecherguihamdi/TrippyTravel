@@ -21,6 +21,7 @@ class CategorieAttractionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => CategorieAttraction::class,
+            'required' => false,
         ]);
     }
 }

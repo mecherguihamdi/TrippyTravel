@@ -4,8 +4,7 @@
 
 {% block body %}
       <div class="main-panel">
-        <div class="content-wrapper">
-            <h1 class="container">Categories Attractions</h1> <br>
+        <div class="content-wrapper"> <br>
           <div class="row">
             <div class="grid-margin stretch-card">
               <div class="card">
@@ -18,7 +17,6 @@
                 <th>Id</th>
                 <th>Libelle</th>
                 <th>ContrainteAge</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +28,7 @@
                 <td>
                     <a href="{{ path('categorie_attraction_show', {'id': categorie_attraction.id}) }}" class="btn btn-secondary"><img src="https://img.icons8.com/ios-filled/50/000000/visible.png"/></a>
                     <a href="{{ path('categorie_attraction_edit', {'id': categorie_attraction.id}) }}" class="btn btn-secondary"><img src="https://img.icons8.com/glyph-neue/50/000000/edit.png"/></a>
+                    <a href="{{ path('categorie_attraction_delete', {'id': categorie_attraction.id}) }}" class="btn btn-secondary"><img src="https://img.icons8.com/ios-glyphs/30/000000/filled-trash.png"></a>
                 </td>
             </tr>
         {% else %}

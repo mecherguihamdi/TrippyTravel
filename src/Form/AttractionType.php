@@ -31,6 +31,7 @@ class AttractionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Attraction::class,
+            'required' => false,
         ]);
     }
 }

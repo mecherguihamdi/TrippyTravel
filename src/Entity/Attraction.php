@@ -21,7 +21,7 @@ class Attraction
     /**
      * @ORM\Column(type="string", length=25)
      * @Assert\
-     * Length(max=25)
+     * NotBlank(message="Inserer un libelle svp")
      */
     private $libelle;
 
