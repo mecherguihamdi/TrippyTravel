@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Excursion;
 use App\Entity\Excursionimage;
+use App\Entity\Excursionreservation;
 use App\Form\ExcursionimageType;
 use App\Form\ExcursionType;
 use App\Repository\ExcursionRepository;
@@ -13,6 +14,9 @@ use Flasher\SweetAlert\Prime\SweetAlertFactory;
 use Flasher\Toastr\Prime\ToastrFactory;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -132,12 +136,29 @@ class ExcursionController extends AbstractController
     }
 
     /**
-     * @Route("excursion/{id}", name="excursion_show_front", methods={"GET"})
+     * @Route("excursion/{id}", name="excursion_show_front", methods={"GET","POST"})
      */
-    public function show_front(Excursion $excursion): Response
+    public function show_front(EntityManagerInterface $entityManager, Excursion $excursion,Request $request,FlasherInterface $flasher): Response
     {
+        $excursionreservation = new Excursionreservation();
+        $form = $this->createFormBuilder(null)
+            ->add('Reserver', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary'
+                ]
+            ])
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $excursionreservation->setPrix($excursion->getPrix());
+            $excursion->addExcursionreservation($excursionreservation);
+            $entityManager->flush();
+            $flasher->addSuccess('Réservé avec succés!');
+            return $this->redirectToRoute('excursion_index_front', [], Response::HTTP_SEE_OTHER);
+        }
         return $this->render('excursion/show_front.html.twig', [
             'excursion' => $excursion,
+            'form' => $form->createView(),
         ]);
     }
 }

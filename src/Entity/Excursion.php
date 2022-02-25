@@ -78,16 +78,15 @@ class Excursion
     private $duration;
 
     /**
-     * @ORM\OneToOne(targetEntity=Excursionreservation::class, mappedBy="excursion", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Excursionreservation::class, mappedBy="excursion", cascade={"persist", "remove"})
      */
-    private $excursionreservation;
-
-
+    private $excursionreservations;
 
 
     public function __construct()
     {
         $this->excursionimages = new ArrayCollection();
+        $this->excursionreservations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -216,22 +215,37 @@ class Excursion
         return $this;
     }
 
-    public function getExcursionreservation(): ?Excursionreservation
+    /**
+     * @return Collection<int, Excursionreservation>
+     */
+    public function getExcursionreservations(): Collection
     {
-        return $this->excursionreservation;
+        return $this->excursionreservations;
     }
 
-    public function setExcursionreservation(Excursionreservation $excursionreservation): self
+    public function addExcursionreservation(Excursionreservation $excursionreservation): self
     {
-        // set the owning side of the relation if necessary
-        if ($excursionreservation->getExcursion() !== $this) {
+        if (!$this->excursionreservations->contains($excursionreservation)) {
+            $this->excursionreservations[] = $excursionreservation;
             $excursionreservation->setExcursion($this);
         }
 
-        $this->excursionreservation = $excursionreservation;
+        return $this;
+    }
+
+    public function removeExcursionreservation(Excursionreservation $excursionreservation): self
+    {
+        if ($this->excursionreservations->removeElement($excursionreservation)) {
+            // set the owning side to null (unless already changed)
+            if ($excursionreservation->getExcursion() === $this) {
+                $excursionreservation->setExcursion(null);
+            }
+        }
 
         return $this;
     }
+
+
 
 
 }

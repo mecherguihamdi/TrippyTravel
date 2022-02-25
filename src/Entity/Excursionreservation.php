@@ -38,10 +38,12 @@ class Excursionreservation
     private $createdAt;
 
     /**
-     * @ORM\OneToOne(targetEntity=Excursion::class, inversedBy="excursionreservation")
+     * @ORM\ManyToOne(targetEntity=Excursion::class, inversedBy="excursionreservations")
      * @ORM\JoinColumn(nullable=false)
      */
     private $excursion;
+
+
 
     public function getId(): ?int
     {
@@ -88,10 +90,12 @@ class Excursionreservation
         return $this->excursion;
     }
 
-    public function setExcursion(Excursion $excursion): self
+    public function setExcursion(?Excursion $excursion): self
     {
         $this->excursion = $excursion;
 
         return $this;
     }
+
+
 }
