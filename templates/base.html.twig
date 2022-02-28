@@ -54,10 +54,7 @@
                 {% if app.user %}
                 <li class="nav-item"><a href="{{ path("reclamation_new") }}" class="nav-link">Reclamation</a></li>
                 {% endif %}
-<<<<<<< HEAD
                 
-=======
->>>>>>> 23237ae5853df956539087ac877ac45710134ae5
                 {% if app.user == false %}
                 <li class="nav-item cta"><a href="{{ path("app_login") }}" class="nav-link">login</a></li>
                 {% endif %}
@@ -66,26 +63,15 @@
                 <li class="nav-item dropdown d-none d-lg-block user-dropdown">
                     <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         {% if app.user.image == null %}
-<<<<<<< HEAD
                                 <img class="img-md rounded-circle" src="{{asset('back-office/images/faces/146029.png')}}" height="30" width="30">
                             {% endif %}
-=======
-                            <img class="img-md rounded-circle" src="{{asset('back-office/images/faces/146029.png')}}" height="30" width="30">
-                        {% endif %}
->>>>>>> 23237ae5853df956539087ac877ac45710134ae5
                         <img class="img-xs rounded-circle" src="{{ asset('uploads/images/products/' ~ app.user.image) }}" alt="." height="30" width="30"> 
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                         <div class="dropdown-header text-center">
                             {% if app.user.image == null %}
-<<<<<<< HEAD
                                 <img class="img-md rounded-circle" src="{{asset('back-office/images/faces/146029.png')}}" height="30" width="30">
                             {% endif %}
                             <img class="img-xs rounded-circle" src="{{ asset('uploads/images/products/' ~ app.user.image) }}" alt="." height="30" width="30"> 
-=======
-                            <img class="img-md rounded-circle" src="{{asset('back-office/images/faces/146029.png')}}" height="30" width="30">
-                        {% endif %}
-                             <img class="img-xs rounded-circle" src="{{ asset('uploads/images/products/' ~ app.user.image) }}" alt="." height="30" width="30"> 
->>>>>>> 23237ae5853df956539087ac877ac45710134ae5
                             <p class="mb-1 mt-3 font-weight-semibold">{{app.user}}</p>
                             <p class="fw-light text-muted mb-0">{{app.user.email}}</p>
                         </div>

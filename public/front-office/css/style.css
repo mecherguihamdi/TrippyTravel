@@ -9346,3 +9346,9 @@ textarea.form-control {
 .white  {
   color: white;
 }
+
+a img{
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}

@@ -49,11 +49,7 @@ class ReclamationController extends AbstractController
             $entityManager->persist($reclamation);
             $entityManager->flush();
 
-<<<<<<< HEAD
             return $this->redirectToRoute('reclamation_index_client', [], Response::HTTP_SEE_OTHER);
-=======
-            return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
->>>>>>> 23237ae5853df956539087ac877ac45710134ae5
         }
 
         return $this->render('reclamation/new.html.twig', [
@@ -65,23 +61,17 @@ class ReclamationController extends AbstractController
     /**
      * @Route("/admin-dashboard/reclamation/{id}", name="reclamation_show", methods={"GET"})
      */
-<<<<<<< HEAD
     public function show(Reclamation $reclamation, EntityManagerInterface $entityManager): Response
     {
         $reclamation->setStatus("seen");
         $entityManager->persist($reclamation);
         $entityManager->flush();
-=======
-    public function show(Reclamation $reclamation): Response
-    {
->>>>>>> 23237ae5853df956539087ac877ac45710134ae5
         return $this->render('reclamation/show.html.twig', [
             'reclamation' => $reclamation,
         ]);
     }
 
     /**
-<<<<<<< HEAD
      * @Route("/admin-dashboard/reclamation/take/{id}", name="reclamation_take", methods={"GET", "POST"})
      */
     public function take(Reclamation $reclamation, EntityManagerInterface $entityManager): Response
@@ -104,8 +94,6 @@ class ReclamationController extends AbstractController
     }
 
     /**
-=======
->>>>>>> 23237ae5853df956539087ac877ac45710134ae5
      * @Route("/reclamation/{id}/edit", name="reclamation_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Reclamation $reclamation, EntityManagerInterface $entityManager): Response

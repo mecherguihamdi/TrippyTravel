@@ -46,25 +46,18 @@ class Reclamation
      * @ORM\ManyToOne(targetEntity=TypeRec::class, inversedBy="reclamations")
      * @ORM\JoinColumn(nullable=false)
      */
-<<<<<<< HEAD
     private $type;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $status;  
-=======
-    private $type;  
->>>>>>> 23237ae5853df956539087ac877ac45710134ae5
 
 
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
-<<<<<<< HEAD
             $this->status = "waiting";
-=======
->>>>>>> 23237ae5853df956539087ac877ac45710134ae5
     }
     
 
@@ -133,7 +126,6 @@ class Reclamation
         return $this;
     }
 
-<<<<<<< HEAD
     public function getStatus(): ?string
     {
         return $this->status;
@@ -146,6 +138,4 @@ class Reclamation
         return $this;
     }
 
-=======
->>>>>>> 23237ae5853df956539087ac877ac45710134ae5
 }

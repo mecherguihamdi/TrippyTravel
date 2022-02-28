@@ -3,7 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<div class="hero-wrap js-fullheight" style="background-image: url('front-office/images/bg_2.jpg');">
+<div class="hero-wrap js-fullheight" style="background-image: url('front-office/images/bgg2.jpg');">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
@@ -44,13 +44,15 @@
                             #}
                             <br>
                             <div class="row">
-                                <div class="col-md-6">
+                                
+                                <div class="col-md-4">
+                                <br>
+                                    <span>Not registered ?</span>&nbsp;<a href="{{ path("app_register") }}" class="white"><u>Create an account!</u></a>
+                                </div>
+                                <div class="col-md-4">
                                     <button class="btn btn-lg btn-primary" type="submit">
                                         Sign in
                                     </button>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="{{ path("app_register") }}" class="white">Or register ?</a>
                                 </div>
                             </div>
                             
