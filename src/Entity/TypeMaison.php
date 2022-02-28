@@ -32,7 +32,7 @@ class TypeMaison
     private $pub;
 
     /**
-     * @ORM\OneToMany(targetEntity=Maisonshotes::class, mappedBy="typeMaison")
+     * @ORM\OneToMany(targetEntity=Maisonshotes::class, mappedBy="typeMaison", cascade={"persist", "remove"})
      */
     private $maisons;
 

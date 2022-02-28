@@ -40,6 +40,7 @@ class MaisonshotesType extends AbstractType
                     'allow_delete' => true,
                     'label' => 'Image(s) :',
                     'prototype' => true,
+
                 )
             )
         ;
@@ -51,6 +52,7 @@ class MaisonshotesType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Maisonshotes::class,
+            'required' => false,
         ]);
     }
 

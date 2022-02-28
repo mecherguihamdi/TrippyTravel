@@ -99,6 +99,6 @@ class TypeMaisonController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('type_maison_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('type_maison_index_admin', [], Response::HTTP_SEE_OTHER);
     }
 }

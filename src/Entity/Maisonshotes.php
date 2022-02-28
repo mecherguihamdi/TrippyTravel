@@ -30,7 +30,7 @@ class Maisonshotes
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\
-     * Length(max=10)
+     * NotBlank(message="verfier svp")
      */
 
     private $libelle;
