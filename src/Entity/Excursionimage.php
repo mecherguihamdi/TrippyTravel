@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 
 /**
@@ -19,6 +21,7 @@ class Excursionimage
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("excursion")
      */
     private $id;
 
@@ -36,12 +39,14 @@ class Excursionimage
     /**
      * @ORM\Column(type="string")
      * @var string|null
+     * @Groups("excursion")
      */
     private $imageName;
 
     /**
      * @ORM\Column(type="datetime", options={"default"="CURRENT_TIMESTAMP"})
      * @var \DateTime
+     * @Groups("excursion")
      */
     private $updatedAt;
 

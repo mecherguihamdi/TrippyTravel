@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ExcursionreservationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ExcursionreservationRepository::class)
@@ -18,16 +19,19 @@ class Excursionreservation
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("excursion")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("excursion")
      */
     private $prix;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("excursion")
      */
     private $status=self::RESERVATION_EXCURSION_DEFAULT;
 

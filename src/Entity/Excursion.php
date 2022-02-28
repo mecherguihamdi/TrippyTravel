@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ExcursionRepository::class)
@@ -20,30 +20,35 @@ class Excursion
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("excursion")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Groups("excursion")
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Groups("excursion")
      */
     private $description;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Groups("excursion")
      */
     private $programme;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Groups("excursion")
      */
     private $ville;
 
@@ -54,6 +59,7 @@ class Excursion
      *     type="float",
      *     message="La valeur {{ value }} est non valide {{ type }}."
      * )
+     * @Groups("excursion")
      */
     private $prix;
 
@@ -61,6 +67,7 @@ class Excursion
      * @ORM\ManyToOne(targetEntity=Excursioncategorie::class, inversedBy="excursions")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Groups("excursion")
      */
     private $excursioncategorie;
 
@@ -68,17 +75,20 @@ class Excursion
     /**
      * @ORM\OneToMany(targetEntity=Excursionimage::class, mappedBy="excursion", cascade={"persist", "remove"})
      * @Assert\Valid()
+     * @Groups("excursion")
      */
     private $excursionimages;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Groups("excursion")
      */
     private $duration;
 
     /**
      * @ORM\OneToMany(targetEntity=Excursionreservation::class, mappedBy="excursion", cascade={"persist", "remove"})
+     * @Groups("excursion")
      */
     private $excursionreservations;
 
