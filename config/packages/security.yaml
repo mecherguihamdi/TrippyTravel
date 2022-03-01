@@ -20,6 +20,8 @@ security:
             guard:
                 authenticators:
                     - App\Security\UserAuthenticator
+            json_login:
+                check_path: api_login
             logout:
                 path: app_logout
                 # where to redirect after logout
@@ -36,3 +38,4 @@ security:
     access_control:
          - { path: ^/admin-dashboard, roles: ROLE_ADMIN }
          - { path: ^/trippy, roles: ROLE_CLIENT }
+    
