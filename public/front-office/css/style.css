@@ -9343,3 +9343,12 @@ textarea.form-control {
 .img-logo{
   max-height: 150px;
 }
+.white  {
+  color: white;
+}
+
+a img{
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
