@@ -23,7 +23,11 @@ class AccessDeniedListener implements EventSubscriberInterface
     {
         $exception = $event->getThrowable();
         if (!$exception instanceof AccessDeniedException) {
+<<<<<<< HEAD
             //$event->setResponse(new Response("you are not authorized to access this page !", 403));
+=======
+            $event->setResponse(new Response("you are not authorized to access this page !", 403));
+>>>>>>> ac3d5fd823228f64f424b4845e76a58019c086b8
             return;
         }
 
