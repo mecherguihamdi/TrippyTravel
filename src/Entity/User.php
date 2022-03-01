@@ -11,24 +11,18 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-<<<<<<< HEAD
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
-=======
->>>>>>> ac3d5fd823228f64f424b4845e76a58019c086b8
 
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  * @Vich\Uploadable
-<<<<<<< HEAD
  * @ApiResource(
  *     normalizationContext={"groups"={"user:read"}},
  *     denormalizationContext={"groups"={"user:write"}}
  * )
-=======
->>>>>>> ac3d5fd823228f64f424b4845e76a58019c086b8
  */
 class User implements UserInterface
 {
@@ -45,10 +39,7 @@ class User implements UserInterface
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email."
      * )
-<<<<<<< HEAD
      * @Groups({"user:read", "user:write"})
-=======
->>>>>>> ac3d5fd823228f64f424b4845e76a58019c086b8
      */
     private $email;
 
@@ -67,15 +58,12 @@ class User implements UserInterface
     private $password;
 
     /**
-<<<<<<< HEAD
      * @Groups("user:write")
      *
      */
     private $plainPassword;
 
     /**
-=======
->>>>>>> ac3d5fd823228f64f424b4845e76a58019c086b8
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
@@ -88,20 +76,16 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\notBlank(message="enter your firstname" )
-<<<<<<< HEAD
      * @Groups({"user:read", "user:write"})
-=======
->>>>>>> ac3d5fd823228f64f424b4845e76a58019c086b8
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\notBlank(message="enter your lastname" )
-<<<<<<< HEAD
+
      * @Groups({"user:read", "user:write"})
-=======
->>>>>>> ac3d5fd823228f64f424b4845e76a58019c086b8
+
      */
     private $lastname;
 
@@ -254,51 +238,6 @@ class User implements UserInterface
         return $this;
     }
 
-<<<<<<< HEAD
-=======
-    /**
-     * @return Collection|Reclamation[]
-     */
-    public function getReclamations(): Collection
-    {
-        return $this->reclamations;
-    }
-
-    public function addReclamation(Reclamation $reclamation): self
-    {
-        if (!$this->reclamations->contains($reclamation)) {
-            $this->reclamations[] = $reclamation;
-            $reclamation->setClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReclamation(Reclamation $reclamation): self
-    {
-        if ($this->reclamations->removeElement($reclamation)) {
-            // set the owning side to null (unless already changed)
-            if ($reclamation->getClient() === $this) {
-                $reclamation->setClient(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function isVerified(): bool
-    {
-        return $this->isVerified;
-    }
-
-    public function setIsVerified(bool $isVerified): self
-    {
-        $this->isVerified = $isVerified;
-
-        return $this;
-    }
-
->>>>>>> ac3d5fd823228f64f424b4845e76a58019c086b8
     public function getFirstname(): ?string
     {
         return $this->firstname;
@@ -350,7 +289,6 @@ class User implements UserInterface
         return $this->firstname." ".$this->lastname;
     }
 
-<<<<<<< HEAD
     public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
@@ -363,6 +301,4 @@ class User implements UserInterface
         return $this;
     }
 
-=======
->>>>>>> ac3d5fd823228f64f424b4845e76a58019c086b8
 }
