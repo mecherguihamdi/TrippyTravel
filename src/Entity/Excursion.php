@@ -64,7 +64,7 @@ class Excursion
     private $prix;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Excursioncategorie::class, inversedBy="excursions")
+     * @ORM\ManyToOne(targetEntity=Excursioncategorie::class, inversedBy="excursions",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(message="Ce champ est obligatoire")
      * @Groups("excursion")

@@ -34,7 +34,7 @@ class ApiExcursionController extends AbstractController
             $entityManager->flush();
             return new Response("Excursion created successfully");
         }catch (\Exception $exception){
-            return $exception->getMessage();
+            return new Response($exception->getMessage());
         }
     }
 }
