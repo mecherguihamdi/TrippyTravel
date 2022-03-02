@@ -62,8 +62,11 @@ class ReclamationController extends AbstractController
      * @Route("/admin-dashboard/reclamation/{id}", name="reclamation_show", methods={"GET"})
      */
     public function show(Reclamation $reclamation, EntityManagerInterface $entityManager): Response
-    {
-        $reclamation->setStatus("seen");
+    {   
+        if ($reclamation->getSeen() == false) {
+            $reclamation->setStatus("seen");
+        }
+        $reclamation->setSeen("true");
         $entityManager->persist($reclamation);
         $entityManager->flush();
         return $this->render('reclamation/show.html.twig', [

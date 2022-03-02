@@ -49,6 +49,7 @@ class ApiSecurityController extends AbstractController{
             )
         );
         $user->setIsVerified(true);
+        $user->setRoles(array("ROLE_CLIENT"));
 
         try {
             $em = $this->getDoctrine()->getManager();
