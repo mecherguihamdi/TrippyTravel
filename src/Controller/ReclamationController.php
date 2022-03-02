@@ -26,6 +26,16 @@ class ReclamationController extends AbstractController
     }
 
     /**
+     * @Route("/admin-dashboard/reclamation/{status}", name="reclamation_index_status", methods={"GET"})
+     */
+    public function indexByStatus(ReclamationRepository $reclamationRepository, String $status): Response
+    {
+        return $this->render('reclamation/index.html.twig', [
+            'reclamations' => $reclamationRepository->findBy(['status' => $status]),
+        ]);
+    }
+
+    /**
      * @Route("/trippy/reclamation", name="reclamation_index_client", methods={"GET"})
      */
     public function indexClient(ReclamationRepository $reclamationRepository): Response
