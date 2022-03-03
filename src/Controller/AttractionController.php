@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
     /**
      * @Route("/")
@@ -19,13 +20,24 @@ class AttractionController extends AbstractController
     /**
      * @Route("/attraction_index", name="attraction_index", methods={"GET"})
      */
-    public function index(AttractionRepository $attractionRepository): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
+        $rep=$this->getDoctrine()->getRepository(Attraction::class);
+        
+        $attraction =$rep-> findAll();
+        $attraction = $paginator->paginate(
+            $attraction, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            1 // Nombre de résultats par page
+        );
+      
         return $this->render('attraction/index.html.twig', [
-            'attractions' => $attractionRepository->findAll(),
+            'attraction' => $attraction,
+           
         ]);
         
     }
+
         /**
      * @Route("/admin-dashboard/attraction", name="admin-dashboard/attraction")
      */

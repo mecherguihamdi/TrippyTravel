@@ -3,43 +3,57 @@
 {% block title %}Attraction index{% endblock %}
 
 {% block body %}
+ <div class="hero-wrap js-fullheight" style="background-image: url('front-office/images/bg_5.jpg');">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/">Home</a></span> <span>Attractions</span></p>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Attractions</h1>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <div class="main-panel">
-        <div class="content-wrapper">
-            <h1>Attractions</h1> <br>
-            <div class="grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title"></h4>
-                  <div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Libelle</th>
-                <th>Localisation</th>
-                <th>Horraire</th>
-                <th>Prix</th>
-                <th>Categorie</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for a in attractions %}
-            <tr>
-                <td>{{ a.libelle }}</td>
-                <td>{{ a.localisation }}</td>
-                <td>{{ a.horraire }}</td>
-                <td>{{ a.prix }}</td>
-                <td>{{ a.getIdCategorie()}}</td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    </div>
-    </div>
-    </div>
-    </div>
+    <section class="ftco-section ftco-degree-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9">
+          	<div class="row">
+						 {% for a in attraction %}
+		    			<div class="col-md ftco-animate">
+		    				<div class="destination">
+		    					<a href={{ path('attraction_show', {'id': a.id}) }} class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{ vich_uploader_asset(a, 'imageFile')}});">
+		    						<div class="icon d-flex justify-content-center align-items-center">
+    							<span class="icon-search2"></span>
+    						</div>
+		    					</a>
+		    					<div class="text p-3">
+		    						<div class="d-flex">
+		    							<div class="one">
+				    						<h3><a href={{ path('attraction_show', {'id': a.id}) }}>{{ a.libelle }}</a></h3>
+			    						</div>
+		    						</div>
+		    						<p>{{ a.horraire }}</p>
+		    						<hr>
+		    						<p class="bottom-area d-flex">
+		    							<span><i class="icon-map-o"></i> {{ a.localisation }}</span> 
+		    							<span class="ml-auto"><a href="#">Book Now</a></span>
+		    						</p>
+		    					</div>
+		    				</div>
+		    			</div>
+		    			{% endfor %}
+          	</div>
+          	<div class="row mt-5">
+		          <div class="col text-center">
+			{{ knp_pagination_render(attraction) }}
+		          </div>
+		        </div>
+          </div> <!-- .col-md-8 -->
+        </div>
+      </div>
+    </section> <!-- .section -->
 {% endblock %}
+
+

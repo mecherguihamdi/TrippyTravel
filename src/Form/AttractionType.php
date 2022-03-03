@@ -8,6 +8,9 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Naming\UniqidNamer;
 
 class AttractionType extends AbstractType
 {
@@ -24,6 +27,7 @@ class AttractionType extends AbstractType
                 'choice_label' => 'libelle',
                 'required' => true,
             ])
+            ->add('imageFile', VichImageType::class)
         ;
     }
 
