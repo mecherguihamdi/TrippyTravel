@@ -26,7 +26,7 @@ class ReclamationController extends AbstractController
     }
 
     /**
-     * @Route("/admin-dashboard/reclamation/{status}", name="reclamation_index_status", methods={"GET"})
+     * @Route("/admin-dashboard/reclamation/status/{status}", name="reclamation_index_status", methods={"GET"})
      */
     public function indexByStatus(ReclamationRepository $reclamationRepository, String $status): Response
     {
