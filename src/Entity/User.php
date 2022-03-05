@@ -106,6 +106,31 @@ class User implements UserInterface
      * @var \DateTime
      */
     private $updatedAt;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $bio;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $telephone;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="date_immutable", nullable=true)
+     */
+    private $naissance;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $sexe;
     
 
     public function __construct()
@@ -297,6 +322,66 @@ class User implements UserInterface
     public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    public function getBio(): ?string
+    {
+        return $this->bio;
+    }
+
+    public function setBio(?string $bio): self
+    {
+        $this->bio = $bio;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?string $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getNaissance(): ?\DateTimeImmutable
+    {
+        return $this->naissance;
+    }
+
+    public function setNaissance(?\DateTimeImmutable $naissance): self
+    {
+        $this->naissance = $naissance;
+
+        return $this;
+    }
+
+    public function getSexe(): ?string
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe(?string $sexe): self
+    {
+        $this->sexe = $sexe;
 
         return $this;
     }

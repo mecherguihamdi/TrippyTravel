@@ -40,7 +40,7 @@ class ReclamationController extends AbstractController
      */
     public function indexClient(ReclamationRepository $reclamationRepository): Response
     {
-        return $this->render('reclamation/indexClient.html.twig', [
+        return $this->render('reclamation/index2.html.twig', [
             'reclamations' => $reclamationRepository->findBy(['client' => $this->getUser()]),
         ]);
     }
