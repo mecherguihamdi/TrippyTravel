@@ -33,7 +33,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
     /**
     * @var Security
     */
-    private $security;
+        private $security;
 
     public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder, Security $security)
     {

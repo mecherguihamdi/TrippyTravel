@@ -36,9 +36,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email."
-     * )
+     * @Assert\notBlank(message="enter your email" )
      * @Groups({"user:read", "user:write"})
      */
     private $email;
