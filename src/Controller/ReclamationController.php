@@ -11,10 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
-
 class ReclamationController extends AbstractController
 {
+
     /**
      * @Route("/admin-dashboard/reclamation", name="reclamation_index", methods={"GET"})
      */
@@ -49,19 +48,20 @@ class ReclamationController extends AbstractController
      * @Route("/trippy/reclamation/new", name="reclamation_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $reclamation = new Reclamation();
-        $form = $this->createForm(ReclamationType::class, $reclamation);
-        $form->handleRequest($request);
+    {   
+        
+            $reclamation = new Reclamation();
+            $form = $this->createForm(ReclamationType::class, $reclamation);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $reclamation->setClient($this->getUser());
-            $entityManager->persist($reclamation);
-            $entityManager->flush();
+            if ($form->isSubmitted() && $form->isValid()) {
+                $reclamation->setClient($this->getUser());
+                $entityManager->persist($reclamation);
+                $entityManager->flush();
 
-            return $this->redirectToRoute('reclamation_index_client', [], Response::HTTP_SEE_OTHER);
-        }
-
+                return $this->redirectToRoute('reclamation_index_client', [], Response::HTTP_SEE_OTHER);
+            }
+        
         return $this->render('reclamation/new.html.twig', [
             'reclamation' => $reclamation,
             'form' => $form->createView(),
