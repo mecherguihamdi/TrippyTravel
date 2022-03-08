@@ -28,7 +28,7 @@ class AttractionController extends AbstractController
         $attraction = $paginator->paginate(
             $attraction, // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            1 // Nombre de résultats par page
+            3 // Nombre de résultats par page
         );
       
         return $this->render('attraction/index.html.twig', [
@@ -47,6 +47,29 @@ class AttractionController extends AbstractController
             'attractions' => $attractionRepository->findAll(),
         ]);
     }
+
+    /**
+   * @Route("/search", name="ajax_search")
+   */
+public function searchAction(Request $request)
+{
+    $em = $this->getDoctrine()->getManager();
+    $libelle = $request->get('q');
+    $attraction =$em->getRepository(Attraction::class)->findEntitiesByLibelle($libelle);
+    if(!$attraction ) {
+        $result['attraction ']['error'] = "Attraction introuvable !";
+    } else {
+        $result['attraction '] = $this->getRealEntities($attraction );
+    }
+    return new Response(json_encode($result));
+}
+
+public function getRealEntities($attraction ){
+    foreach ($attraction  as $attraction ){
+        $realEntities[$attraction ->getId()] = [$attraction->getLibelle(),$attraction->getLocalisation(),$attraction->getHorraire(), $attraction->getPrix(), $attraction->getIdCategorie()];
+    }
+    return $realEntities;
+}
 
     /**
      * @Route("/admin-dashboard/attraction/new", name="attraction_new", methods={"GET", "POST"})

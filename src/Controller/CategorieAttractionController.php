@@ -36,6 +36,29 @@ class CategorieAttractionController extends AbstractController
         ]);
     }
 
+        /**
+   * @Route("/search", name="ajax_search")
+   */
+public function searchAction(Request $request)
+{
+    $em = $this->getDoctrine()->getManager();
+    $libelle = $request->get('q');
+    $categorieAttraction =$em->getRepository(CategorieAttraction::class)->findEntitiesByLibelle($libelle);
+    if(!$categorieAttraction ) {
+        $result['categorieAttraction ']['error'] = "Categorie introuvable !";
+    } else {
+        $result['categorieAttraction '] = $this->getRealEntities($categorieAttraction );
+    }
+    return new Response(json_encode($result));
+}
+
+public function getRealEntities($categorieAttraction ){
+    foreach ($categorieAttraction  as $categorieAttraction ){
+        $realEntities[$categorieAttraction ->getId()] = [$categorieAttraction->getLibelle(),$categorieAttraction->getContrainteAge()];
+    }
+    return $realEntities;
+}
+
     /**
      * @Route("/admin-dashboard/categorie_attraction/new", name="categorie_attraction_new", methods={"GET", "POST"})
      */

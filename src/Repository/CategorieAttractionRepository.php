@@ -47,4 +47,15 @@ class CategorieAttractionRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findEntitiesByLibelle($libelle){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT c
+                FROM App\Entity\CategorieAttraction c
+                WHERE c.libelle LIKE :libelle'
+            )
+            ->setParameter('libelle', '%'.$libelle.'%')
+            ->getResult();
+    }
 }
