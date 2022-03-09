@@ -6,6 +6,7 @@ use App\Entity\Reclamation;
 use App\Form\ReclamationType;
 use App\Repository\ReclamationRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,20 +18,32 @@ class ReclamationController extends AbstractController
     /**
      * @Route("/admin-dashboard/reclamation", name="reclamation_index", methods={"GET"})
      */
-    public function index(ReclamationRepository $reclamationRepository): Response
+    public function index(Request $request,ReclamationRepository $reclamationRepository, PaginatorInterface $pagination): Response
     {
+        $donnes=$this->getDoctrine()->getRepository(Reclamation::class)->findAll();
+        $reclamations= $pagination->paginate(
+            $donnes,
+            $request->query->getInt('page', 1),
+            5  
+        );
         return $this->render('reclamation/index.html.twig', [
-            'reclamations' => $reclamationRepository->findAll(),
+            'reclamations'=>$reclamations
         ]);
     }
 
     /**
      * @Route("/admin-dashboard/reclamation/status/{status}", name="reclamation_index_status", methods={"GET"})
      */
-    public function indexByStatus(ReclamationRepository $reclamationRepository, String $status): Response
+    public function indexByStatus(Request $request, ReclamationRepository $reclamationRepository, String $status, PaginatorInterface $pagination): Response
     {
+        $donnes=$this->getDoctrine()->getRepository(Reclamation::class)->findBy(['status' => $status]);
+        $reclamations= $pagination->paginate(
+            $donnes,
+            $request->query->getInt('page', 1),
+            5
+        );
         return $this->render('reclamation/index.html.twig', [
-            'reclamations' => $reclamationRepository->findBy(['status' => $status]),
+            'reclamations' => $reclamations
         ]);
     }
 
