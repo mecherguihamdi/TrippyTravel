@@ -50,10 +50,16 @@ class ReclamationController extends AbstractController
     /**
      * @Route("/trippy/reclamation", name="reclamation_index_client", methods={"GET"})
      */
-    public function indexClient(ReclamationRepository $reclamationRepository): Response
+    public function indexClient(Request $request, ReclamationRepository $reclamationRepository, PaginatorInterface $pagination): Response
     {
+        $donnes=$this->getDoctrine()->getRepository(Reclamation::class)->findBy(['client' => $this->getUser()]);
+        $reclamations= $pagination->paginate(
+            $donnes,
+            $request->query->getInt('page', 1),
+            8 
+        );
         return $this->render('reclamation/index2.html.twig', [
-            'reclamations' => $reclamationRepository->findBy(['client' => $this->getUser()]),
+            'reclamations' => $reclamations
         ]);
     }
 
@@ -93,6 +99,22 @@ class ReclamationController extends AbstractController
         $entityManager->persist($reclamation);
         $entityManager->flush();
         return $this->render('reclamation/show.html.twig', [
+            'reclamation' => $reclamation,
+        ]);
+    }
+
+    /**
+     * @Route("/admin-trippy/reclamation/{id}", name="reclamation_show_client", methods={"GET"})
+     */
+    public function showClient(Reclamation $reclamation, EntityManagerInterface $entityManager): Response
+    {   
+        if ($reclamation->getSeen() == false) {
+            $reclamation->setStatus("seen");
+        }
+        $reclamation->setSeen("true");
+        $entityManager->persist($reclamation);
+        $entityManager->flush();
+        return $this->render('reclamation/show2.html.twig', [
             'reclamation' => $reclamation,
         ]);
     }
