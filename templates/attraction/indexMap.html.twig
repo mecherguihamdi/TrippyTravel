@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Attraction index
+{% endblock %}
+{% block head %}
+	<head>
+		<title>Simple Markers</title>
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+		<link rel="stylesheet" type="text/css" href="./style.css"/>
+		<script src="./index.js"></script>
+		<style>
+			/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+			#map {
+				height: 100%;
+			}
+
+			/* Optional: Makes the sample page fill the window. */
+			html,
+			body {
+				height: 100%;
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+{% endblock %}
+{% block body %}
+	<body>
+		<div class="hero-wrap js-fullheight" style="background-image: url('front-office/images/bg_5.jpg');">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+					<div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+						<p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+							<span class="mr-2">
+								<a href="/">Home</a>
+							</span>
+							<span>Attractions</span>
+						</p>
+						<h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Attractions</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<section class="ftco-section ftco-degree-bg">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 sidebar">
+						<div class="sidebar-wrap bg-light ftco-animate">
+							<h3 class="heading mb-4">Find City</h3>
+							<form action="#">
+								<div class="fields">
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="Destination, City">
+									</div>
+									<div class="form-group">
+										<div class="select-wrap one-third">
+											<div class="icon">
+												<span class="ion-ios-arrow-down"></span>
+											</div>
+											<select name="" id="" class="form-control" placeholder="Keyword search">
+												<option value="">Select Location</option>
+												<option value="">San Francisco USA</option>
+												<option value="">Berlin Germany</option>
+												<option value="">Lodon United Kingdom</option>
+												<option value="">Paris Italy</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<input type="text" id="checkin_date" class="form-control" placeholder="Date from">
+									</div>
+									<div class="form-group">
+										<input type="text" id="checkin_date" class="form-control" placeholder="Date to">
+									</div>
+									<div class="form-group">
+										<div class="range-slider">
+											<span>
+												<input type="number" value="25000" min="0" max="120000"/>
+												-
+												<input type="number" value="50000" min="0" max="120000"/>
+											</span>
+											<input value="1000" min="0" max="120000" step="500" type="range"/>
+											<input value="50000" min="0" max="120000" step="500" type="range"/>
+										</svg>
+									</div>
+								</div>
+								<div class="form-group">
+									<input type="submit" value="Search" class="btn btn-primary py-3 px-5">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="col-lg-9">
+					<div class="row">
+						<div id="map"></div>
+						<script>
+							function initMap() {
+const myLatLng = {
+lat: -25.363,
+lng: 131.044
+};
+const map = new google.maps.Map(document.getElementById("map"), {
+zoom: 4,
+center: myLatLng
+});
+
+new google.maps.Marker({position: myLatLng, map, title: "Hello World!"});
+}
+						</script>
+						<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+						<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyVWxE4nORPfE95jJmOUNbtblBbGZoxdw&callback=initMap&v=weekly"></script>
+					</div>
+				</div>
+			</div>
+		</section>
+	</body>
+{% endblock %}

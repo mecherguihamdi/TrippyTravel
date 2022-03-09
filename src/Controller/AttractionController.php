@@ -37,6 +37,16 @@ class AttractionController extends AbstractController
         ]);
         
     }
+     /**
+     * @Route("/attraction_indexMap", name="attraction_indexMap", methods={"GET"})
+     */
+
+    public function indexMap(AttractionRepository $AttractionRepository): Response
+    {
+        return $this->render('attraction/indexMap.html.twig', [
+            'attraction' => $AttractionRepository->findAll(),
+        ]);
+    }
 
         /**
      * @Route("/admin-dashboard/attraction", name="admin-dashboard/attraction")
@@ -49,24 +59,29 @@ class AttractionController extends AbstractController
     }
 
     /**
-   * @Route("/search", name="ajax_search")
+   * @Route("/searchA", name="ajax_searchA")
    */
-public function searchAction(Request $request)
+public function searchAction(Request $request,AttractionRepository $repository)
 {
     $em = $this->getDoctrine()->getManager();
     $libelle = $request->get('q');
-    $attraction =$em->getRepository(Attraction::class)->findEntitiesByLibelle($libelle);
-    if(!$attraction ) {
-        $result['attraction ']['error'] = "Attraction introuvable !";
-    } else {
-        $result['attraction '] = $this->getRealEntities($attraction );
+    if($request->get('q')){
+        $attraction =$em->getRepository(Attraction::class)->findEntitiesByLibelle($libelle);
+        if(!$attraction ) {
+            $result['attraction ']['error'] = "Attraction introuvable !";
+        } else {
+            $result['attraction '] = $this->getRealEntities($attraction );
+        }
+    }else{
+        $result['attraction '] = $this->getRealEntities($repository->findAll());
     }
+
     return new Response(json_encode($result));
 }
 
 public function getRealEntities($attraction ){
     foreach ($attraction  as $attraction ){
-        $realEntities[$attraction ->getId()] = [$attraction->getLibelle(),$attraction->getLocalisation(),$attraction->getHorraire(), $attraction->getPrix(), $attraction->getIdCategorie()];
+        $realEntities[$attraction ->getId()] = [$attraction->getLibelle(),$attraction->getLocalisation(),$attraction->getHorraire(), $attraction->getPrix(), $attraction->getIdCategorie(), "uploads/images/attraction/".$attraction->getImage()];
     }
     return $realEntities;
 }
