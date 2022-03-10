@@ -20,7 +20,7 @@ use Knp\Component\Pager\PaginatorInterface;
 class AttractionController extends AbstractController
 {
     /**
-     * @Route("/trippy/attraction", name="attraction_index", methods={"GET","POST"})
+     * @Route("/attraction", name="attraction_index", methods={"GET","POST"})
      */
     public function index(Request $request, PaginatorInterface $paginator): Response
     {
@@ -39,7 +39,7 @@ class AttractionController extends AbstractController
         ]);
     }
     /**
-     * @Route("/trippy/attraction_indexMap", name="attraction_indexMap", methods={"GET"})
+     * @Route("/attraction_indexMap", name="attraction_indexMap", methods={"GET"})
      */
     public function indexMap(AttractionRepository $AttractionRepository): Response
     {
@@ -185,7 +185,7 @@ class AttractionController extends AbstractController
     }
 
     /**
-     * @Route("/trippy/attraction{id}", name="attraction_delete", methods={"POST"})
+     * @Route("/admin-dashboard/attraction{id}", name="attraction_delete", methods={"POST"})
      */
     public function delete(Request $request, Attraction $attraction, EntityManagerInterface $entityManager): Response
     {
