@@ -19,22 +19,30 @@ class MaisonshotesRepository extends ServiceEntityRepository
         parent::__construct($registry, Maisonshotes::class);
     }
 
-    // /**
-    //  * @return Maisonshotes[] Returns an array of Maisonshotes objects
-    //  */
-    /*
+    /**
+      * @return Maisonshotes[]|NULL Returns an array of Maisonshotes objects
+      **/
+
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $query= $this->createQueryBuilder('r');
+         $query->andWhere(
+               $query->expr()->like('r.libelle',  ':val')
+          )
+           ->setParameter('val', '%'.$value.'%');
+        return $query->getQuery()->getResult();
     }
-    */
+    public function findEntitiesByLibelle($str){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p
+                FROM App\Entity\Maisonshotes p
+                WHERE p.libelle LIKE :str'
+            )
+            ->setParameter('str', '%'.$str.'%')
+            ->getResult();
+    }
+
 
     /*
     public function findOneBySomeField($value): ?Maisonshotes

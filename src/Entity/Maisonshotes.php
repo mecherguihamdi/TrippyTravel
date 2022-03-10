@@ -23,10 +23,6 @@ class Maisonshotes
     private $id;
 
 
-
-
-
-
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\
@@ -80,9 +76,15 @@ class Maisonshotes
      */
     private $maisonhotesimages;
 
+    /**
+     * @ORM\OneToMany(targetEntity=MaisonReservation::class, mappedBy="maisonshotes",cascade={"persist", "remove"})
+     */
+    private $maisonReservations;
+
     public function __construct()
     {
         $this->maisonhotesimages = new ArrayCollection();
+        $this->maisonReservations = new ArrayCollection();
     }
 
 
@@ -213,6 +215,36 @@ class Maisonshotes
     }
     public function __toString(){
 
+    }
+
+    /**
+     * @return Collection|MaisonReservation[]
+     */
+    public function getMaisonReservations(): Collection
+    {
+        return $this->maisonReservations;
+    }
+
+    public function addMaisonReservation(MaisonReservation $maisonReservation): self
+    {
+        if (!$this->maisonReservations->contains($maisonReservation)) {
+            $this->maisonReservations[] = $maisonReservation;
+            $maisonReservation->setMaisonshotes($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMaisonReservation(MaisonReservation $maisonReservation): self
+    {
+        if ($this->maisonReservations->removeElement($maisonReservation)) {
+            // set the owning side to null (unless already changed)
+            if ($maisonReservation->getMaisonshotes() === $this) {
+                $maisonReservation->setMaisonshotes(null);
+            }
+        }
+
+        return $this;
     }
 
 

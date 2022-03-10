@@ -31,10 +31,10 @@ class TypeMaison
      */
     private $pub;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Maisonshotes::class, mappedBy="typeMaison", cascade={"persist", "remove"})
-     */
-    private $maisons;
+    ///**
+     //* @ORM\OneToMany(targetEntity=Maisonshotes::class, mappedBy="typeMaison", cascade={"persist", "remove"})
+     //*/
+    //private $maisons;
 
     public function __ToString()
     {
@@ -77,23 +77,7 @@ class TypeMaison
         return $this;
     }
 
-    /**
-     * @return Collection|Maisonshotes[]
-     */
-    public function getMaisons(): Collection
-    {
-        return $this->maisons;
-    }
 
-    public function addMaison(Maisonshotes $maison): self
-    {
-        if (!$this->maisons->contains($maison)) {
-            $this->maisons[] = $maison;
-            $maison->setTypeMaison($this);
-        }
-
-        return $this;
-    }
 
     public function removeMaison(Maisonshotes $maison): self
     {
