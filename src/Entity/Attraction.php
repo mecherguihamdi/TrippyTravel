@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AttractionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -64,6 +66,16 @@ class Attraction
      * @var File
      */
     private $imageFile;
+
+    /**
+     * @ORM\OneToMany(targetEntity=AttractionReservation::class, mappedBy="attraction", cascade={"persist", "remove"})
+     */
+    private $attractionReservations;
+
+    public function __construct()
+    {
+        $this->attractionReservations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -155,5 +167,35 @@ class Attraction
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * @return Collection<int, AttractionReservation>
+     */
+    public function getAttractionReservations(): Collection
+    {
+        return $this->attractionReservations;
+    }
+
+    public function addAttractionReservation(AttractionReservation $attractionReservation): self
+    {
+        if (!$this->attractionReservations->contains($attractionReservation)) {
+            $this->attractionReservations[] = $attractionReservation;
+            $attractionReservation->setAttraction($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttractionReservation(AttractionReservation $attractionReservation): self
+    {
+        if ($this->attractionReservations->removeElement($attractionReservation)) {
+            // set the owning side to null (unless already changed)
+            if ($attractionReservation->getAttraction() === $this) {
+                $attractionReservation->setAttraction(null);
+            }
+        }
+
+        return $this;
     }
 }

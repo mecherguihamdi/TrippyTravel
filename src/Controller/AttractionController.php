@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Attraction;
+use App\Entity\AttractionReservation;
 use App\Form\AttractionType;
 use App\Repository\AttractionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +20,7 @@ use Knp\Component\Pager\PaginatorInterface;
 class AttractionController extends AbstractController
 {
     /**
-     * @Route("/attraction_index", name="attraction_index", methods={"GET"})
+     * @Route("/attraction_index", name="attraction_index", methods={"GET","POST"})
      */
     public function index(Request $request, PaginatorInterface $paginator): Response
     {
@@ -34,7 +36,7 @@ class AttractionController extends AbstractController
         return $this->render('attraction/index.html.twig', [
             'attraction' => $attraction,
            
-        ]);
+        ]); 
         
     }
      /**
@@ -46,6 +48,42 @@ class AttractionController extends AbstractController
         return $this->render('attraction/indexMap.html.twig', [
             'attraction' => $AttractionRepository->findAll(),
         ]);
+    }
+
+//     /**
+//     * @Route("/attraction_indexDetail", name="attraction_indexDetail", methods={"GET"})
+//     */
+//
+//    public function indexDetail(AttractionRepository $AttractionRepository): Response
+//    {
+//        return $this->render('attraction/indexDetail.html.twig', [
+//            'attraction' => $AttractionRepository->findAll(),
+//        ]);
+//    }
+    /**
+     * @Route("/attractionfront/{id}", name="attractionfront_single" , methods={"GET","POST"})
+     */
+    public function attraction_one(EntityManagerInterface $entityManage,Request $request,Attraction $attraction): Response
+    {
+        $attractionservation = new AttractionReservation();
+        $form = $this->createFormBuilder(null)
+            ->add('Reserver', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary'
+                ]
+            ])
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $attractionservation->setPrix($attraction->getPrix());
+            $attraction->addAttractionreservation($attractionservation);
+            $entityManage->flush();
+
+        }
+        return $this->render('attraction/attractionreservation.html.twig', [
+            'form' => $form->createView(),
+        ]);
+
     }
 
         /**

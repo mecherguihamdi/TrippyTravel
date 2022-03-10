@@ -156,7 +156,7 @@ entitySelector.append('<li style="color:red;">' + value + '</li>');
 					{% for a in attraction %}
 						<div class="col-md-4 ftco-animate" >
 							<div class="destination">
-								<a href={{ path('attraction_show', {'id': a.id} ) }} class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{ vich_uploader_asset(a, 'imageFile')}});">
+								<a href={{ path('attractionfront_single', {'id': a.id} ) }} class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{ vich_uploader_asset(a, 'imageFile')}});">
 									<div class="icon d-flex justify-content-center align-items-center">
 										<span class="icon-search2"></span>
 									</div>
@@ -165,7 +165,7 @@ entitySelector.append('<li style="color:red;">' + value + '</li>');
 									<div class="d-flex">
 										<div class="one">
 											<h3>
-												<a href={{ path('attraction_show', {'id': a.id} ) }}>{{ a.libelle }}</a>
+												<a href={{ path('attractionfront_single', {'id': a.id} ) }}>{{ a.libelle }}</a>
 											</h3>
 										</div>
 									</div>
@@ -176,7 +176,7 @@ entitySelector.append('<li style="color:red;">' + value + '</li>');
 											<i class="icon-map-o"></i>
 											{{ a.localisation }}</span>
 										<span class="ml-auto">
-											<a href="#">Reserver</a>
+											<a href="{{ path('attractionfront_single', {'id': a.id} ) }}">Reserver</a>
 										</span>
 									</p>
 								</div>
