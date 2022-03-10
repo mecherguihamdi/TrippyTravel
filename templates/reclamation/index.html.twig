@@ -20,12 +20,21 @@
                                 </div>
                                 
                                 
-                                <p> Liste des reclamations</p>
-                                <a href="{{ path('reclamation_index_status', {'status': "waiting"}) }}">waiting</a>
-                                <a href="{{ path('reclamation_index_status', {'status': "seen"}) }}">seen</a>
-                                <a href="{{ path('reclamation_index_status', {'status': "in progress"}) }}">in progress</a>
-                                 <a href="{{ path('reclamation_index_status', {'status': "done"}) }}">done</a>
-
+                                
+                                <div class="row">
+                                <div class="col-md-3">
+                                      <p class="card-description"> Liste des reclamations</p>
+       
+                                 </div>
+                                    <div class="col-md-6" >
+                                        <a href="{{ path('reclamation_index') }}"  class="btn btn-light">All</a>
+                                        <a href="{{ path('reclamation_index_status', {'status': "waiting"}) }}"  class="btn btn-light">waiting</a>
+                                        <a href="{{ path('reclamation_index_status', {'status': "seen"}) }}" class="btn btn-light">seen</a>
+                                        <a href="{{ path('reclamation_index_status', {'status': "in progress"}) }}" class="btn btn-light">in progress</a>
+                                        <a href="{{ path('reclamation_index_status', {'status': "done"}) }}" class="btn btn-light">done</a>
+                                    </div>
+                                </div>
+                                
 
 
                             </div>

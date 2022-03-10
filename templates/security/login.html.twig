@@ -28,7 +28,6 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -71,7 +70,7 @@
 						</button>
 					</div>
 
-					<div class="w-full text-center p-t-27 p-b-239">
+					<div class="w-full text-center p-t-27 p-b-150">
 						<span class="txt1">
 							Forgot
 						</span>
@@ -79,8 +78,13 @@
 						<a href="{{ path("app_forgot_password_request") }}" class="txt2">
 							Password?
 						</a>
+						
 					</div>
-
+					<div class="w-full text-center  p-b-15">
+                <a href="{{ path('home') }}">
+                    <img src="{{asset('logo.png')}}" alt="logo" width="40" height="40"/>
+                </a>
+				</div>
 					<div class="w-full text-center">
 						<span class="txt1">
 							Create account?
