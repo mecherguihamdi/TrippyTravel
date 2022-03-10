@@ -20,7 +20,7 @@ use Knp\Component\Pager\PaginatorInterface;
 class AttractionController extends AbstractController
 {
     /**
-     * @Route("/attraction_index", name="attraction_index", methods={"GET","POST"})
+     * @Route("/trippy/attraction", name="attraction_index", methods={"GET","POST"})
      */
     public function index(Request $request, PaginatorInterface $paginator): Response
     {
@@ -39,9 +39,8 @@ class AttractionController extends AbstractController
         ]);
     }
     /**
-     * @Route("/attraction_indexMap", name="attraction_indexMap", methods={"GET"})
+     * @Route("/trippy/attraction_indexMap", name="attraction_indexMap", methods={"GET"})
      */
-
     public function indexMap(AttractionRepository $AttractionRepository): Response
     {
         return $this->render('attraction/indexMap.html.twig', [
@@ -60,7 +59,7 @@ class AttractionController extends AbstractController
     //        ]);
     //    }
     /**
-     * @Route("/attractionfront/{id}", name="attractionfront_single" , methods={"GET","POST"})
+     * @Route("/trippy/attractionfront/{id}", name="attractionfront_single" , methods={"GET","POST"})
      */
     public function attraction_one(EntityManagerInterface $entityManage, Request $request, Attraction $attraction): Response
     {
@@ -105,7 +104,7 @@ class AttractionController extends AbstractController
     }
 
     /**
-     * @Route("/searchA", name="ajax_searchA")
+     * @Route("/attraction/searchA", name="ajax_searchA")
      */
     public function searchAction(Request $request, AttractionRepository $repository)
     {
@@ -128,7 +127,7 @@ class AttractionController extends AbstractController
     public function getRealEntities($attraction)
     {
         foreach ($attraction  as $attraction) {
-            $realEntities[$attraction->getId()] = [$attraction->getLibelle(), $attraction->getLocalisation(), $attraction->getHorraire(), $attraction->getPrix(), $attraction->getIdCategorie(), "uploads/images/attraction/" . $attraction->getImage()];
+            $realEntities[$attraction->getId()] = [$attraction->getLibelle(), $attraction->getLocalisation(), $attraction->getHorraire(), $attraction->getPrix(), $attraction->getIdCategorie(), "/uploads/images/attraction/" . $attraction->getImage()];
         }
         return $realEntities;
     }
@@ -186,7 +185,7 @@ class AttractionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="attraction_delete", methods={"POST"})
+     * @Route("/trippy/attraction{id}", name="attraction_delete", methods={"POST"})
      */
     public function delete(Request $request, Attraction $attraction, EntityManagerInterface $entityManager): Response
     {
