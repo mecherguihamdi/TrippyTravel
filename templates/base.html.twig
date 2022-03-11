@@ -49,7 +49,10 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a href="{{ path("maisonhotes") }}" class="nav-link">Maison d'hotes</a></li>
+
+<li class="nav-item active"><a href="{{ path("home") }}" class="nav-link">Acceuil</a></li>
+                <li class="nav-item"><a href="{{ path("maisonshotes_index") }}" class="nav-link">Maison d'hotes</a></li>
+
                 <li class="nav-item"><a href="{{ path("excursion") }}" class="nav-link">Excursion</a></li>
                 <li class="nav-item"><a href="{{ path("hotel") }}" class="nav-link">Hotels</a></li>
                 <li class="dropdown nav-item">
@@ -187,6 +190,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="{{ asset('front-office/js/google-map.js') }}"></script>
 <script src="{{ asset('front-office/js/main.js') }}"></script>
-
+{% block js %}
+{% endblock %}
 </body>
 </html>

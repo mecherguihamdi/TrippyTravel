@@ -273,6 +273,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
+
                     <a href="{{ path('chambre_index') }}" class="nav-link" >
                         <i class="menu-icon mdi mdi-floor-plan"></i>
                         <span class="menu-title">Chambre hotel</span>
@@ -283,6 +284,20 @@
                     <a href="{{ path('admin-dashboard/maisonhotes') }}" class="nav-link" >
                         <i class="menu-icon mdi mdi-floor-plan"></i>
                         <span class="menu-title">Maison d'hotes</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('type_maison_index_admin') }}" class="nav-link" >
+                        <i class="menu-icon mdi mdi-floor-plan"></i>
+                        <span class="menu-title">Type maisons</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('maison_reservation_index') }}" class="nav-link" >
+                        <i class="menu-icon mdi mdi-floor-plan"></i>
+                        <span class="menu-title">Maison Reservation</span>
                         <i class="menu-arrow"></i>
                     </a>
                 </li>
@@ -326,6 +341,7 @@
 		<script src="{{ asset('back-office/vendors/chart.js/Chart.min.js') }}"></script>
 		<script src="{{ asset('back-office/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 		<script src="{{ asset('back-office/vendors/progressbar.js/progressbar.min.js') }}"></script>
+
 
 		<!-- End plugin js for this page -->
 		<!-- inject:js -->
