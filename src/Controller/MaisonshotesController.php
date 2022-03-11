@@ -19,7 +19,7 @@ use App\Notifications\NouveauMaisonNotification;
 
 
 /**
- * @Route("/")
+ * @Route("/ ")
  */
 class MaisonshotesController extends AbstractController
 {
@@ -38,12 +38,10 @@ class MaisonshotesController extends AbstractController
 
     /**
      * @Route("/maisonshotes", name="maisonshotes_index", methods={"GET","POST"})
-
      */
     public function maisonshotes (Request $request, PaginatorInterface $paginator): Response
     {
         $rep=$this->getDoctrine()->getRepository(maisonshotes::class);
-
         $maisonshote =$rep-> findAll();
         $maisonshote = $paginator->paginate(
             $maisonshote, // Requête contenant les données à paginer (ici nos articles)

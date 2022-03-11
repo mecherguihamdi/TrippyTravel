@@ -3,7 +3,6 @@
 
 namespace App\Notifications;
 
-require_once 'C:\wamp64\www\TrippyTravel\vendor\autoload.php';
 
 
 
