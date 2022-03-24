@@ -324,6 +324,7 @@
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.3.0"
+    },
     "stripe/stripe-php": {
         "version": "v7.118.0"
     },
