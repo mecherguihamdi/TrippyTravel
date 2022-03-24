@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <title>{% block title %} {% endblock %}</title>
     <meta charset="utf-8">
@@ -34,47 +35,45 @@
     <!-- inject:css:back -->
     <link rel="stylesheet" href="{{ asset('back-office/vendors/mdi/css/materialdesignicons.min.css') }}">
 
-    
 
-    
+
+
 </head>
+
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-    <div class="container">
-        <a class="navbar-brand" href="{{ path("home") }}">Trippy travel</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="{{ path(" home ") }}">Trippy travel</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="oi oi-menu"></span> Menu
         </button>
 
-        <div class="collapse navbar-collapse" id="ftco-nav">
-            <ul class="navbar-nav ml-auto">
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
 
-<li class="nav-item active"><a href="{{ path("home") }}" class="nav-link">Acceuil</a></li>
-                <li class="nav-item"><a href="{{ path("maisonshotes_index") }}" class="nav-link">Maison d'hotes</a></li>
+                    <li class="nav-item active"><a href="{{ path(" home ") }}" class="nav-link">Acceuil</a></li>
+                    <li class="nav-item"><a href="{{ path(" maisonshotes_index ") }}" class="nav-link">Maison d'hotes</a></li>
 
-                <li class="nav-item"><a href="{{ path("excursion") }}" class="nav-link">Excursion</a></li>
-                <li class="nav-item"><a href="{{ path("hotel") }}" class="nav-link">Hotels</a></li>
-                <li class="dropdown nav-item">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Attractions</span> <span class="caret"></span></a>
+                    <li class="nav-item"><a href="{{ path(" excursion_index_front ") }}" class="nav-link">Excursion</a></li>
+                    <li class="nav-item"><a href="{{ path(" hotel ") }}" class="nav-link">Hotels</a></li>
+                    <li class="dropdown nav-item">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Attractions</span> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ path("attraction_index") }}" style="color:blue">Attractions - Grid</a></li>
-                            <li><a href="{{ path("attraction_indexMap") }}" style="color:blue">Attractions - Map</a></li>
+                            <li><a href="{{ path(" attraction_index ") }}" style="color:blue">Attractions - Grid</a></li>
+                            <li><a href="{{ path(" attraction_indexMap ") }}" style="color:blue">Attractions - Map</a></li>
                         </ul>
-                </li>
-                <li class="nav-item"><a href="{{ path("blog") }}" class="nav-link">Blog</a></li>
+                    </li>
+                    <li class="nav-item"><a href="{{ path(" blog ") }}" class="nav-link">Blog</a></li>
 
-                {% if app.user %}
-                <li class="nav-item"><a href="{{ path("reclamation_new") }}" class="nav-link">Reclamation</a></li>
-                {% endif %}
-                
-                {% if app.user == false %}
-                <li class="nav-item cta"><a href="{{ path("app_login") }}" class="nav-link">login</a></li>
-                {% endif %}
-                {% if app.user %}
-                
-                <li class="nav-item dropdown d-none d-lg-block user-dropdown">
-                    <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if app.user %}
+                    <li class="nav-item"><a href="{{ path(" reclamation_new ") }}" class="nav-link">Reclamation</a></li>
+                    {% endif %} {% if app.user == false %}
+                    <li class="nav-item cta"><a href="{{ path(" app_login ") }}" class="nav-link">login</a></li>
+                    {% endif %} {% if app.user %}
+
+                    <li class="nav-item dropdown d-none d-lg-block user-dropdown">
+                        <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         {% if app.user.image == null %}
                                 <img class="img-md rounded-circle" src="{{asset('back-office/images/faces/146029.png')}}" height="30" width="30">
                             {% endif %}
@@ -90,107 +89,110 @@
                         </div>
                         <a href="{{ path('profile') }}" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile </a>
                         <a href="{{ path('reclamation_index_client') }}" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Reclamations</a>
-                        <a href="{{ path("app_logout") }}" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Logout</a>
-                    </div>
-                </li>
-                {% endif %}
+                        <a href="{{ path(" app_logout ") }}" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Logout</a>
+            </div>
+            </li>
+            {% endif %}
             </ul>
         </div>
-    </div>
-</nav>
-<!-- END nav -->
+        </div>
+    </nav>
+    <!-- END nav -->
 
-{% block body %}
-
-{% endblock %}
-
-{% block footer %}
-<footer class="ftco-footer ftco-bg-dark ftco-section">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-md">
-                <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2"><img src="{{ asset('logo.png') }}" /></h2>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                        <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                        <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="ftco-footer-widget mb-4 ml-md-5">
-                    <h2 class="ftco-heading-2">Information</h2>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="py-2 d-block">About</a></li>
-                        <li><a href="#" class="py-2 d-block">Service</a></li>
-                        <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li>
-                        <li><a href="#" class="py-2 d-block">Become a partner</a></li>
-                        <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
-                        <li><a href="#" class="py-2 d-block">Privacy and Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">Customer Support</h2>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="py-2 d-block">FAQ</a></li>
-                        <li><a href="#" class="py-2 d-block">Payment Option</a></li>
-                        <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
-                        <li><a href="#" class="py-2 d-block">How it works</a></li>
-                        <li><a href="#" class="py-2 d-block">Contact Us</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">Have a Questions?</h2>
-                    <div class="block-23 mb-3">
-                        <ul>
-                            <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-                            <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+    {% block body %} {% endblock %} {% block footer %}
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2"><img src="{{ asset('logo.png') }}" /></h2>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
                         </ul>
                     </div>
                 </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4 ml-md-5">
+                        <h2 class="ftco-heading-2">Information</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">About</a></li>
+                            <li><a href="#" class="py-2 d-block">Service</a></li>
+                            <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li>
+                            <li><a href="#" class="py-2 d-block">Become a partner</a></li>
+                            <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
+                            <li><a href="#" class="py-2 d-block">Privacy and Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Customer Support</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">FAQ</a></li>
+                            <li><a href="#" class="py-2 d-block">Payment Option</a></li>
+                            <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
+                            <li><a href="#" class="py-2 d-block">How it works</a></li>
+                            <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
-
-                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-            </div>
-        </div>
-    </div>
-</footer>
-{% endblock %}
+    </footer>
+    {% endblock %}
 
 
-<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
-<script src="{{ asset('front-office/js/jquery.min.js') }}"></script>
-<script src="{{ asset('front-office/js/jquery-migrate-3.0.1.min.js') }}"></script>
-<script src="{{ asset('front-office/js/popper.min.js') }}"></script>
-<script src="{{ asset('front-office/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('front-office/js/jquery.easing.1.3.js') }}"></script>
-<script src="{{ asset('front-office/js/jquery.waypoints.min.js') }}"></script>
-<script src="{{ asset('front-office/js/jquery.stellar.min.js') }}"></script>
-<script src="{{ asset('front-office/js/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('front-office/js/jquery.magnific-popup.min.js') }}"></script>
-<script src="{{ asset('front-office/js/aos.js') }}"></script>
-<script src="{{ asset('front-office/js/jquery.animateNumber.min.js') }}"></script>
-<script src="{{ asset('front-office/js/bootstrap-datepicker.js') }}"></script>
-<script src="{{ asset('front-office/js/jquery.timepicker.min.js') }}"></script>
-<script src="{{ asset('front-office/js/scrollax.min.js') }}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="{{ asset('front-office/js/google-map.js') }}"></script>
-<script src="{{ asset('front-office/js/main.js') }}"></script>
-{% block js %}
-{% endblock %}
+    <script src="{{ asset('front-office/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('front-office/js/jquery-migrate-3.0.1.min.js') }}"></script>
+    <script src="{{ asset('front-office/js/popper.min.js') }}"></script>
+    <script src="{{ asset('front-office/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('front-office/js/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ asset('front-office/js/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('front-office/js/jquery.stellar.min.js') }}"></script>
+    <script src="{{ asset('front-office/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('front-office/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('front-office/js/aos.js') }}"></script>
+    <script src="{{ asset('front-office/js/jquery.animateNumber.min.js') }}"></script>
+    <script src="{{ asset('front-office/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('front-office/js/scrollax.min.js') }}"></script>
+    <script src="{{ asset('front-office/js/main.js') }}"></script>
+    {% block js %} {% endblock %}
+    <script src="{{ asset('front-office/js/script.js') }}">
+    </script>
+    {{ flasher_render() }}
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' /> {% block scripts %}{% endblock %}
 </body>
+
 </html>
