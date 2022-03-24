@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ExcursioncategorieController extends AbstractController
 {
     /**
-     * @Route("admin-dashboard//excursioncategorie/", name="excursioncategorie_index", methods={"GET"})
+     * @Route("admin-dashboard/excursioncategorie/", name="excursioncategorie_index", methods={"GET"})
      */
     public function index(ExcursioncategorieRepository $excursioncategorieRepository): Response
     {
@@ -26,7 +26,7 @@ class ExcursioncategorieController extends AbstractController
     }
 
     /**
-     * @Route("admin-dashboard//excursioncategorie/new", name="excursioncategorie_new", methods={"GET", "POST"})
+     * @Route("admin-dashboard/excursioncategorie/new", name="excursioncategorie_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager,FlasherInterface $flasher): Response
     {
@@ -48,7 +48,7 @@ class ExcursioncategorieController extends AbstractController
     }
 
     /**
-     * @Route("admin-dashboard//excursioncategorie/{id}", name="excursioncategorie_show", methods={"GET"})
+     * @Route("admin-dashboard/excursioncategorie/{id}", name="excursioncategorie_show", methods={"GET"})
      */
     public function show(Excursioncategorie $excursioncategorie): Response
     {
@@ -58,7 +58,7 @@ class ExcursioncategorieController extends AbstractController
     }
 
     /**
-     * @Route("admin-dashboard//excursioncategorie/{id}/edit", name="excursioncategorie_edit", methods={"GET", "POST"})
+     * @Route("admin-dashboard/excursioncategorie/{id}/edit", name="excursioncategorie_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Excursioncategorie $excursioncategorie, EntityManagerInterface $entityManager,FlasherInterface $flasher): Response
     {
@@ -78,7 +78,7 @@ class ExcursioncategorieController extends AbstractController
     }
 
     /**
-     * @Route("admin-dashboard//excursioncategorie/{id}", name="excursioncategorie_delete", methods={"POST"})
+     * @Route("admin-dashboard/excursioncategorie/{id}", name="excursioncategorie_delete", methods={"POST"})
      */
     public function delete(Request $request, Excursioncategorie $excursioncategorie, EntityManagerInterface $entityManager,SweetAlertFactory $flasher): Response
     {

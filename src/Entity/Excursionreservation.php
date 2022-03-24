@@ -13,8 +13,11 @@ class Excursionreservation
 {
     public function __construct() {
         $this->setCreatedAt(new \DateTime());
+        $this->setStart(new \DateTime());
+        $this->setEnd(new \DateTime());
     }
     const RESERVATION_EXCURSION_DEFAULT = "reservation.non_paye";
+    const RESERVATION_EXCURSION_SUCCESS = "succeeded";
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -47,7 +50,25 @@ class Excursionreservation
      */
     private $excursion;
 
+    /**
+     * @ORM\Column(type="datetime", options={"default"="CURRENT_TIMESTAMP"})
+     */
+    private $start;
 
+    /**
+     * @ORM\Column(type="datetime", options={"default"="CURRENT_TIMESTAMP"})
+     */
+    private $end;
+
+    /**
+     *  @ORM\Column(type="string", length=255)
+     */
+    private $user;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $pi;
 
     public function getId(): ?int
     {
@@ -101,5 +122,51 @@ class Excursionreservation
         return $this;
     }
 
+    public function getStart(): ?\DateTimeInterface
+    {
+        return $this->start;
+    }
 
+    public function setStart(\DateTimeInterface $start): self
+    {
+        $this->start = $start;
+
+        return $this;
+    }
+
+    public function getEnd(): ?\DateTimeInterface
+    {
+        return $this->end;
+    }
+
+    public function setEnd(\DateTimeInterface $end): self
+    {
+        $this->end = $end;
+
+        return $this;
+    }
+
+    public function getUser(): ?string
+    {
+        return $this->user;
+    }
+
+    public function setUser(?string $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getPi(): ?string
+    {
+        return $this->pi;
+    }
+
+    public function setPi(?string $pi): self
+    {
+        $this->pi = $pi;
+
+        return $this;
+    }
 }

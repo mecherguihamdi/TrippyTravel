@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="{{ asset('back-office/css/vertical-layout-light/style.css') }}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset('back-office/images/favicon.png') }}" />
+    {% block script %}
+    {% endblock %}
 </head>
 <body>
 <div class="container-scroller">
@@ -65,6 +67,8 @@
                             <li class="nav-item"> <a class="nav-link" href="{{ path('excursion_index') }}">Liste Excursions</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ path('excursioncategorie_index') }}">Liste Catégories</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ path('excursionreservation_index') }}">Liste Réservation</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('excursion_calendar') }}">Calendrier réservation</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('excursionchartjs') }}">Statistique</a></li>
                         </ul>
                     </div>
                 </li>
@@ -131,10 +135,12 @@
 <script src="{{ asset('back-office/js/dashboard.js') }}"></script>
 <script src="{{ asset('back-office/js/Chart.roundedBarCharts.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="{{ asset('back-office/js/script.js') }}"></script>
 <!-- End custom js for this page-->
 {{ flasher_render() }}
-
+{% block js %}
+{% endblock %}
 </body>
 
 </html>
