@@ -61,7 +61,8 @@ class Excursionreservation
     private $end;
 
     /**
-     *  @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="excursionreservations")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
@@ -69,6 +70,8 @@ class Excursionreservation
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $pi;
+
+
 
     public function getId(): ?int
     {
@@ -146,12 +149,12 @@ class Excursionreservation
         return $this;
     }
 
-    public function getUser(): ?string
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?string $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
@@ -169,4 +172,6 @@ class Excursionreservation
 
         return $this;
     }
+
+
 }

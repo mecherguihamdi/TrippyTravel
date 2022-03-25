@@ -19,7 +19,7 @@
 //     });
 // });
 // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
-$('.btn-collection-add').click(function (e) {
+$('.btn-collection-add').click(function(e) {
     addDocumentation($($(this).data('prototype-add')));
     e.preventDefault(); // évite qu'un # apparaisse dans l'URL
     return false;
@@ -40,13 +40,13 @@ function addDocumentation($container) {
 }
 
 // Ajout du listener sur le clic du lien pour effectivement supprimer l'entrée de la collection.
-$(document).on('click', '.btn-collection-delete', function (e) {
+$(document).on('click', '.btn-collection-delete', function(e) {
     $(this).closest('.panel').remove();
     e.preventDefault(); // évite qu'un # apparaisse dans l'URL
     return false;
 });
-$(document).ready(function () {
-    $('#btn-ok').click(function (e) {
+$(document).ready(function() {
+    $('#btn-ok').click(function(e) {
         let $form = $(this).closest('form');
         Swal.fire({
             title: 'Êtes-vous sûr?',
@@ -79,9 +79,9 @@ $(document).ready(function () {
 //         }
 //     });
 // });
-jQuery(document).ready(function () {
+jQuery(document).ready(function() {
     var searchRequest = null;
-    $("#search").keyup(function () {
+    $("#search").keyup(function() {
         var minlength = 0;
         var that = this;
         var value = $(this).val();
@@ -90,18 +90,18 @@ jQuery(document).ready(function () {
             if (searchRequest != null)
                 searchRequest.abort();
             searchRequest = $.ajax({
-                type: "GET",
+                type: "POST",
                 url: "/admin-dashboard/excursionsearch",
                 data: {
                     'q': value
                 },
                 dataType: "text",
-                success: function (msg) {
+                success: function(msg) {
                     // we need to check if the value is the same
                     if (value === $(that).val()) {
                         var result = JSON.parse(msg);
-                        $.each(result, function (key, arr) {
-                            $.each(arr, function (id, value) {
+                        $.each(result, function(key, arr) {
+                            $.each(arr, function(id, value) {
                                 if (key === 'excursions') {
                                     if (id !== 'error') {
                                         console.log(value[1]);
@@ -165,4 +165,3 @@ function comparer(index) {
 function getCellValue(row, index) {
     return $(row).children('td').eq(index).text();
 }
-

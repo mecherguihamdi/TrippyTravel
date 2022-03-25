@@ -1,15 +1,17 @@
-#flasher-container-top-right{
+#flasher-container-top-right {
     top: 150px!important;
 }
-.text-right{
+
+.text-right {
     text-align: right;
 }
-.vich-image img{
+
+.vich-image img {
     padding: 0.25rem;
     background-color: #fff;
     border: 1px solid #dee2e6;
     border-radius: 0.25rem;
-    max-width: 100%;
-    max-height: 100px;
+    width: 150px;
+    max-height: 100%;
     height: auto;
 }

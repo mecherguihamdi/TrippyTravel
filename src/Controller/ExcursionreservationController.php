@@ -23,7 +23,12 @@ use Symfony\Component\HttpFoundation\Session;
 
 class ExcursionreservationController extends AbstractController
 {
+    private $mailer;
 
+    public function __construct( MailerInterface $mailer)
+    {
+        $this->mailer = $mailer;
+    }
     /**
      * @Route("/excursionreservation/", name="excursionreservation_index", methods={"GET"})
      */
@@ -255,28 +260,5 @@ class ExcursionreservationController extends AbstractController
             '<dt class="text-muted">Utilisateur</dt>'.
             '<dd >'.$user_exc.'</dd>'
         );
-//        $events = $repository->findAll();
-//
-//        $rdvs = [];
-//
-//        foreach ($events as $event) {
-//            $color = "#249d1c";
-//            $status = "payé";
-//            if ($event->getStatus() == Excursionreservation::RESERVATION_EXCURSION_DEFAULT){
-//                $color = "#ff0000";
-//                $status = "non payé";
-//            }
-//            $rdvs[] = [
-//                'id' => $event->getId(),
-//                'start' => $event->getStart()->format('Y-m-d'),
-//                'end' => $event->getEnd()->format('Y-m-d'),
-//                'title' => $status,
-//                'color' => $color
-//            ];
-//        }
-//
-//        $data = json_encode($rdvs);
-//
-//        return $this->render('excursionreservation/calendar.html.twig', compact('data'));
-    }
+  }
 }

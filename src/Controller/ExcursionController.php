@@ -16,6 +16,7 @@ use Flasher\Prime\FlasherInterface;
 use Flasher\SweetAlert\Prime\SweetAlertFactory;
 use Flasher\Toastr\Prime\ToastrFactory;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -25,10 +26,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
-
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 class ExcursionController extends AbstractController
 {
+    private $mailer;
+
+    public function __construct( MailerInterface $mailer)
+    {
+        $this->mailer = $mailer;
+    }
     /**
      * @Route("admin-dashboard/excursion/", name="excursion_index", methods={"GET","POST"})
      */
@@ -141,7 +149,7 @@ class ExcursionController extends AbstractController
         $excursions = $paginator->paginate(
             $all,
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            2 // Nombre de résultats par page
+            1 // Nombre de résultats par page
         );
         $categories = $this->getDoctrine()->getRepository(Excursioncategorie::class)->findAll();
         return $this->render('excursion/front_index.html.twig', [
@@ -151,7 +159,7 @@ class ExcursionController extends AbstractController
         ]);
     }
 
-    /**
+     /**
      * @Route("excursion/{id}", name="excursion_show_front", methods={"GET","POST"})
      */
     public function show_front(DompdfController $Dompdf, EntityManagerInterface $entityManager, Excursion $excursion, Request $request, FlasherInterface $flasher): Response
@@ -194,10 +202,10 @@ class ExcursionController extends AbstractController
             ->getForm();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-//            $user_connected = $this->getUser();
-//            if ($user_connected){
+            $user_connected = $this->getUser();
+            if ($user_connected){
                 $excursionreservation->setPrix($excursion->getPrix());
-                $excursionreservation->setUser(1);
+                $excursionreservation->setUser($this->getUser());
                 $excursion->addExcursionreservation($excursionreservation);
                 $entityManager->flush();
                 $session  = $this->get("session");
@@ -206,23 +214,24 @@ class ExcursionController extends AbstractController
                 $lib_file = 'Reservation.pdf';
                 $Dompdf->generate_store($excursionreservation,$lib_file);
                 //send email
-//                try {
-//                    $email = new TemplatedEmail();
-//                    $email->subject("Notification réservation");
-//                    $email->from('amani.boussaa@esprit.tn');
-//                    $email->to($user_connected->getEmail());
-//                    $email->htmlTemplate('excursionreservation/confirmation_email.html.twig');
-//                    $email->context(['username' => "amani"." "."boussaa"]);
-//                    $email->attachFromPath($lib_file);
-//                    $this->mailer->send($email);
-//                    $flasher->addSuccess("Email envoyé, Verifier votre boite email svp");
-//                } catch (TransportExceptionInterface $e) {
-//                    $flasher->addError("Email non envoyé. ");
-//                }
+                try {
+                    $email = new TemplatedEmail();
+                    $email->subject("Notification réservation");
+                    $email->from('amani.boussaa@esprit.tn');
+                    $email->to($user_connected->getEmail());
+                    $email->htmlTemplate('excursionreservation/confirmation_email.html.twig');
+                    $email->context(['username' => $user_connected->getFirstname()." ".$user_connected->getLastname()]);
+                    $email->attachFromPath($lib_file);
+                    $this->mailer->send($email);
+                    $flasher->addSuccess("Email envoyé, Verifier votre boite email svp");
+                } catch (TransportExceptionInterface $e) {
+                    $flasher->addError("Email non envoyé. ");
+                }
                 return $this->redirectToRoute('app_excursionpaiement', [], Response::HTTP_SEE_OTHER);
-//            }else{
-//                return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
-//            }
+            }else{
+                return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
+                //$flasher->addError("Vous devez être connecté");
+            }
         }
         return $this->render('excursion/show_front.html.twig', [
             'excursion' => $excursion,
@@ -233,14 +242,12 @@ class ExcursionController extends AbstractController
         ]);
     }
 
-
-
     /**
-     * @Route("/admin-dashboard/excursionsearch", name="ajax_search", methods={"GET"})
+     * @Route("/admin-dashboard/excursionsearch", methods={"POST"})
      */
-    public function searchAction(Request $request, ExcursionRepository $excursionRepository)
-//    public function searchAction()
+   public function searchAction(Request $request)
     {
+        $excursionRepository = $this->getDoctrine()->getRepository(Excursion::class);
         $requestString = $request->get('q');
         if ($request){
             $excursions = $excursionRepository->findEntitiesByLibelle($requestString);

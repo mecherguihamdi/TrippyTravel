@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220324224818 extends AbstractMigration
+final class Version20220324232418 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -28,7 +28,7 @@ final class Version20220324224818 extends AbstractMigration
         $this->addSql('CREATE TABLE excursioncategorie (id INT AUTO_INCREMENT NOT NULL, libelle VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE excursioncomment (id INT AUTO_INCREMENT NOT NULL, excursion_id INT DEFAULT NULL, pseudo VARCHAR(255) DEFAULT NULL, email VARCHAR(255) DEFAULT NULL, contenu LONGTEXT NOT NULL, actif TINYINT(1) NOT NULL, rgpd TINYINT(1) NOT NULL, created_at DATETIME DEFAULT NULL, INDEX IDX_FCF11D474AB4296F (excursion_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE excursionimage (id INT AUTO_INCREMENT NOT NULL, excursion_id INT DEFAULT NULL, image_name VARCHAR(255) NOT NULL, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, INDEX IDX_51A2C7624AB4296F (excursion_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE excursionreservation (id INT AUTO_INCREMENT NOT NULL, excursion_id INT NOT NULL, prix VARCHAR(255) NOT NULL, status VARCHAR(255) NOT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, start DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, end DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, user VARCHAR(255) NOT NULL, pi VARCHAR(255) DEFAULT NULL, INDEX IDX_4BA02EF34AB4296F (excursion_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE excursionreservation (id INT AUTO_INCREMENT NOT NULL, excursion_id INT NOT NULL, user_id INT NOT NULL, prix VARCHAR(255) NOT NULL, status VARCHAR(255) NOT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, start DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, end DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, pi VARCHAR(255) DEFAULT NULL, INDEX IDX_4BA02EF34AB4296F (excursion_id), INDEX IDX_4BA02EF3A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE hotel (id INT AUTO_INCREMENT NOT NULL, libelle VARCHAR(255) NOT NULL, localisation VARCHAR(255) NOT NULL, nbetoile INT NOT NULL, nbchdispo INT NOT NULL, description_hotel VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE hotelimage (id INT AUTO_INCREMENT NOT NULL, hotel_id INT DEFAULT NULL, image VARCHAR(255) NOT NULL, updated_at DATETIME NOT NULL, INDEX IDX_2FDDA2CC3243BB18 (hotel_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE hotelreservation (id INT AUTO_INCREMENT NOT NULL, chambre_id INT DEFAULT NULL, prix VARCHAR(255) DEFAULT NULL, status VARCHAR(255) DEFAULT NULL, cratedat DATETIME DEFAULT CURRENT_TIMESTAMP, start DATETIME DEFAULT CURRENT_TIMESTAMP, end DATETIME DEFAULT CURRENT_TIMESTAMP, INDEX IDX_545753C09B177F54 (chambre_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -47,6 +47,7 @@ final class Version20220324224818 extends AbstractMigration
         $this->addSql('ALTER TABLE excursioncomment ADD CONSTRAINT FK_FCF11D474AB4296F FOREIGN KEY (excursion_id) REFERENCES excursion (id)');
         $this->addSql('ALTER TABLE excursionimage ADD CONSTRAINT FK_51A2C7624AB4296F FOREIGN KEY (excursion_id) REFERENCES excursion (id)');
         $this->addSql('ALTER TABLE excursionreservation ADD CONSTRAINT FK_4BA02EF34AB4296F FOREIGN KEY (excursion_id) REFERENCES excursion (id)');
+        $this->addSql('ALTER TABLE excursionreservation ADD CONSTRAINT FK_4BA02EF3A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE hotelimage ADD CONSTRAINT FK_2FDDA2CC3243BB18 FOREIGN KEY (hotel_id) REFERENCES hotel (id)');
         $this->addSql('ALTER TABLE hotelreservation ADD CONSTRAINT FK_545753C09B177F54 FOREIGN KEY (chambre_id) REFERENCES chambre (id)');
         $this->addSql('ALTER TABLE maison_reservation ADD CONSTRAINT FK_3DDFB7C238B45370 FOREIGN KEY (maisonshotes_id) REFERENCES maisonshotes (id)');
@@ -73,6 +74,7 @@ final class Version20220324224818 extends AbstractMigration
         $this->addSql('ALTER TABLE maisonhoteimage DROP FOREIGN KEY FK_3F087E038B45370');
         $this->addSql('ALTER TABLE maisonshotes DROP FOREIGN KEY FK_AF236C2A29A199BF');
         $this->addSql('ALTER TABLE reclamation DROP FOREIGN KEY FK_CE606404C54C8C93');
+        $this->addSql('ALTER TABLE excursionreservation DROP FOREIGN KEY FK_4BA02EF3A76ED395');
         $this->addSql('ALTER TABLE reclamation DROP FOREIGN KEY FK_CE60640419EB6921');
         $this->addSql('ALTER TABLE reset_password_request DROP FOREIGN KEY FK_7CE748AA76ED395');
         $this->addSql('DROP TABLE attraction');

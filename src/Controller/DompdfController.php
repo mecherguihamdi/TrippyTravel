@@ -14,15 +14,10 @@ class DompdfController extends AbstractController
     public function generate_download($excursionreservation)
     {
         $reservation_id = $excursionreservation->getId();
-        $client = [
-            "id"=>1,
-            "email"=>"amani.boussaa16@gmail.com",
-            "firstname"=>"amani",
-            "lastname"=>"boussaa",
-        ];
-        $client_firstname = $client["firstname"];
-        $client_lastname = $client["lastname"];
-        $client_email = $client["email"];
+        $client = $excursionreservation->getUser();
+        $client_firstname = $client->getFirstname();
+        $client_lastname = $client->getLastname();
+        $client_email = $client->getEmail();
         $reservation_lib = $excursionreservation->getExcursion()->getLibelle();
         $reservation_prix = $excursionreservation->getExcursion()->getPrix()." DT";
         $reservation_description = $excursionreservation->getExcursion()->getDescription();
@@ -69,15 +64,10 @@ class DompdfController extends AbstractController
     public function generate_view($excursionreservation)
     {
         $reservation_id = $excursionreservation->getId();
-        $client = [
-            "id"=>1,
-            "email"=>"amani.boussaa16@gmail.com",
-            "firstname"=>"amani",
-            "lastname"=>"boussaa",
-        ];
-        $client_firstname = $client["firstname"];
-        $client_lastname = $client["lastname"];
-        $client_email = $client["email"];
+        $client = $excursionreservation->getUser();
+        $client_firstname = $client->getFirstname();
+        $client_lastname = $client->getLastname();
+        $client_email = $client->getEmail();
         $reservation_lib = $excursionreservation->getExcursion()->getLibelle();
         $reservation_prix = $excursionreservation->getExcursion()->getPrix()." DT";
         $reservation_description = $excursionreservation->getExcursion()->getDescription();
@@ -124,15 +114,10 @@ class DompdfController extends AbstractController
     public function generate_store($excursionreservation,$lib_file)
     {
         $reservation_id = $excursionreservation->getId();
-        $client = [
-            "id"=>1,
-            "email"=>"amani.boussaa16@gmail.com",
-            "firstname"=>"amani",
-            "lastname"=>"boussaa",
-        ];
-        $client_firstname = $client["firstname"];
-        $client_lastname = $client["lastname"];
-        $client_email = $client["email"];
+        $client = $excursionreservation->getUser();
+        $client_firstname = $client->getFirstname();
+        $client_lastname = $client->getLastname();
+        $client_email = $client->getEmail();
         $reservation_lib = $excursionreservation->getExcursion()->getLibelle();
         $reservation_prix = $excursionreservation->getExcursion()->getPrix()." DT";
         $reservation_description = $excursionreservation->getExcursion()->getDescription();
