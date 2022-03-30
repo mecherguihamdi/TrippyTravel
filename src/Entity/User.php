@@ -36,7 +36,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\notBlank(message="enter your email" )
+     * @Assert\notBlank(message="enter your email")
      * @Groups({"user:read", "user:write"})
      */
     private $email;
@@ -106,6 +106,11 @@ class User implements UserInterface
     private $updatedAt;
 
     /**
+     * @ORM\OneToMany(targetEntity=Excursionreservation::class, mappedBy="user")
+     */
+    private $excursionreservations;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $bio;
@@ -136,6 +141,7 @@ class User implements UserInterface
         $this->reclamations = new ArrayCollection();
         $this->sent = new ArrayCollection();
         $this->received = new ArrayCollection();
+        $this->excursionreservations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -329,6 +335,30 @@ class User implements UserInterface
         return $this->bio;
     }
 
+     /**
+     * @return Collection<int, Excursionreservation>
+     */
+    public function getExcursionreservations(): Collection
+    {
+        return $this->excursionreservations;
+    }
+
+    public function addExcursionreservation(Excursionreservation $excursionreservation): self
+    {
+        if (!$this->excursionreservations->contains($excursionreservation)) {
+            $this->excursionreservations[] = $excursionreservation;
+            $excursionreservation->setUser($this);
+        }
+    }
+    public function removeExcursionreservation(Excursionreservation $excursionreservation): self
+    {
+        if ($this->excursionreservations->removeElement($excursionreservation)) {
+            // set the owning side to null (unless already changed)
+            if ($excursionreservation->getUser() === $this) {
+                $excursionreservation->setUser(null);
+            }
+        }
+    }
     public function setBio(?string $bio): self
     {
         $this->bio = $bio;

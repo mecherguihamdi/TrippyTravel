@@ -1,0 +1,123 @@
+
+{% extends 'baseBO.html.twig' %}
+
+{% block title %}BO Excursion{% endblock %}
+
+{% block body %}
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="card-title">Statistique</h4>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <canvas id="myChart2"></canvas>
+                                </div>
+                                <div class="col-md-6">
+                                    <canvas id="myChart3"></canvas>
+                                </div>
+                            </div>
+                            <div>
+                                <canvas id="myChart"></canvas>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script>
+        $.get('/admin-dashboard/getexcursionchartjs1', {}, function(response){
+            var labels1 = response.labels  //<- here you have your results
+            var data1 = response.data  //<- here you have your results
+            var prix_non_paye = response.prix_non_paye  //<- here you have your results
+            var prix_success = response.prix_success  //<- here you have your results
+            var categorieLib = response.categorieLib  //<- here you have your results
+            var categorieColor = response.categorieColor  //<- here you have your results
+            var categorieCount = response.categorieCount  //<- here you have your results
+            const labels = labels1;
+
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Réservation',
+                    backgroundColor: '#16587a',
+                    borderColor: '#16587a',
+                    data: data1 ,
+                }]
+            };
+
+            const config = {
+                type: 'line',
+                data: data,
+                options: {}
+            };
+        // render chart
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+        /**chart 2**/
+        const data2 = {
+            labels: ['Réservation non payé','Réservation payé'],
+            datasets: [{
+                label: 'Réservation',
+                backgroundColor: [
+                    '#da2137',
+                    'rgb(70,196,8)'
+                ],
+                data: [prix_non_paye, prix_success] ,
+                hoverOffset : 4
+            }]
+        };
+
+            const config2 = {
+                type: 'doughnut',
+                data: data2,
+                options: {}
+            };
+            // render chart
+            const myChart2 = new Chart(
+                document.getElementById('myChart2'),
+                config2
+            );
+
+            /************************chart categorie**********************/
+            const data3 = {
+                labels: categorieLib,
+                datasets: [{
+                    label: 'Réservation',
+                    backgroundColor: categorieColor,
+                    data: categorieCount ,
+                    hoverOffset : 4
+                }]
+            };
+
+            const config3 = {
+                type: 'pie',
+                data: data3,
+                options: {}
+            };
+            // render chart
+            const myChart3 = new Chart(
+                document.getElementById('myChart3'),
+                config3
+            );
+        });
+    </script>
+
+
+{% endblock %}
+
