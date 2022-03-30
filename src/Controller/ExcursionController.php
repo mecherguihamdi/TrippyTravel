@@ -14,7 +14,6 @@ use App\Repository\ExcursionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Flasher\Prime\FlasherInterface;
 use Flasher\SweetAlert\Prime\SweetAlertFactory;
-use Flasher\Toastr\Prime\ToastrFactory;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,7 +39,7 @@ class ExcursionController extends AbstractController
     /**
      * @Route("admin-dashboard/excursion/", name="excursion_index", methods={"GET","POST"})
      */
-    public function index(Request $request, ExcursionRepository $excursionRepository, ToastrFactory $flasher): Response
+    public function index(Request $request, ExcursionRepository $excursionRepository): Response
     {
         $excursions = $excursionRepository->findAll();
         return $this->render('excursion/index.html.twig', [

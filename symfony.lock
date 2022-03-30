@@ -191,6 +191,12 @@
     "php-flasher/flasher": {
         "version": "v0.9.6"
     },
+    "php-flasher/flasher-notyf": {
+        "version": "v0.9.8"
+    },
+    "php-flasher/flasher-notyf-symfony": {
+        "version": "v0.9.8"
+    },
     "php-flasher/flasher-sweet-alert": {
         "version": "v0.9.6"
     },
@@ -198,12 +204,6 @@
         "version": "v0.9.6"
     },
     "php-flasher/flasher-symfony": {
-        "version": "v0.9.6"
-    },
-    "php-flasher/flasher-toastr": {
-        "version": "v0.9.6"
-    },
-    "php-flasher/flasher-toastr-symfony": {
         "version": "v0.9.6"
     },
     "phpdocumentor/reflection-common": {
@@ -322,14 +322,14 @@
             "./config/packages/sensio_framework_extra.yaml"
         ]
     },
-    "swiftmailer/swiftmailer": {
-        "version": "v6.3.0"
-    },
     "stripe/stripe-php": {
         "version": "v7.118.0"
     },
     "studio-42/elfinder": {
         "version": "2.1.60"
+    },
+    "swiftmailer/swiftmailer": {
+        "version": "v6.3.0"
     },
     "symfony/asset": {
         "version": "v4.4.37"
@@ -631,7 +631,6 @@
             "ref": "f0b2fccdca2dfd97dc2fd5ad216d5e27c4f895ac"
         },
         "files": [
-
             "config/packages/dev/swiftmailer.yaml",
             "config/packages/swiftmailer.yaml",
             "config/packages/test/swiftmailer.yaml"
